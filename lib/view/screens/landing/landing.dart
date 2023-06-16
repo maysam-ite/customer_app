@@ -60,7 +60,7 @@ class Landing extends StatelessWidget {
               ),
               Column(children: [
                 SizedBox(
-                  height: Get.size.height * .02,
+                  height: Get.size.height * .01,
                 ),
                 Obx(() {
                   return Row(

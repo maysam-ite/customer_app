@@ -4,40 +4,60 @@ import 'package:customer_app/main.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../constant/theme.dart';
 import '../../../data/Models/login_model.dart';
 import '../../widget/no_internet_page.dart';
-import 'login_service.dart';
+import 'register_service.dart';
 
-class LoginController extends GetxController
+class RegisterController extends GetxController
     implements StatuseRequestController {
   late String password;
   late String email;
+  late String firstName;
+  late String lastName;
+  late String confirmPassword;
+
   @override
   StatuseRequest? statuseRequest = StatuseRequest.init;
   late RxBool passwordSecure = true.obs;
-  LoginService service = LoginService();
-  late GlobalKey<FormState> formstate;
-
+  late RxBool confirmPasswordSecure = true.obs;
+  RegisterService service = RegisterService();
+ GlobalKey<FormState> formstate=GlobalKey<FormState>();
+late RxString imagePath;
   @override
   void onInit() async {
-    password = '123';
+    imagePath=''.obs;
+    confirmPassword = '';
+    firstName='';
+    lastName='';
+    password = '';
     email = '';
-    formstate = GlobalKey<FormState>();
-    //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
+    // statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
   }
-  
+   Future pickimage() async {
+    final myfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (myfile != null) {
+      imagePath.value = myfile.path;
+    }
+  }
+
   void changePasswordSecure() {
     passwordSecure.value = !passwordSecure.value;
   }
+  void changeConfirmPasswordSecure() {
+    confirmPasswordSecure.value = !confirmPasswordSecure.value;
+  }
 
   void onpresslogin() async {
+     print(confirmPassword);
+      print(password);
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
-      statuseRequest = StatuseRequest.loading;
+   /*   statuseRequest = StatuseRequest.loading;
       update();
       LoginModel model = LoginModel(password: password, email: email);
       dynamic response = await logindata(
@@ -52,9 +72,10 @@ class LoginController extends GetxController
       } else if (statuseRequest == StatuseRequest.validationfailuer) {
         snackBarForErrors();
       } else {
-       snackBarForErrors();
-      }
-   }
+        snackBarForErrors();
+      }*/
+     
+    }
     update();
   }
 
@@ -70,7 +91,7 @@ class LoginController extends GetxController
 
   logindata(LoginModel model) async {
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
-        await service.login(model);
+        await service.register(model);
 
     return response.fold((l) => l, (r) => r);
   }
@@ -86,9 +107,8 @@ class LoginController extends GetxController
   whenLoginSuccess(response) async {
     Map<String, dynamic> data = response[
         'data']; // for getting a body of data from map and save a token in local dataBase
-      await prefService.createString(
-        'token', response['token']); // storing token
-    await prefService.createString('id',data['admin_id'].toString());
+    await prefService.createString('token', response['token']); // storing token
+    await prefService.createString('id', data['admin_id'].toString());
     Get.offNamed('/Home');
     update();
   }

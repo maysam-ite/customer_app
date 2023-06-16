@@ -1,10 +1,10 @@
 import 'package:customer_app/constant/status_request.dart';
 import 'package:customer_app/constant/theme.dart';
+import 'package:customer_app/view/widget/general_text_style.dart';
 import 'package:customer_app/view/widget/my_button.dart';
 import 'package:customer_app/view/widget/no_internet_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sized_context/sized_context.dart';
 import '../../../constant/font.dart';
 import '../../../constant/sizes.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -50,33 +50,18 @@ class LoginPage extends StatelessWidget {
           putBackgroundImage(context),
           Positioned(
             top: Get.size.height * .1,
-            left: checkIfTheSizeAllowTheFloatingContainerToExist(context)
-                ? Get.size.width * .5
-                : Get.size.width * .3,
-            child: Center(
-              child: Visibility(
-                visible:
-                    checkIfTheSizeAllowTheFloatingContainerToExist(context),
-                replacement: theLoginColumnBody(size),
-                child: Container(
-                  width: Get.size.width * .4,
-                  height: Get.size.height * .8,
-                  decoration: floatingContainerBoxDecoration(),
-                  child: theLoginColumnBody(size),
-                ),
-              ),
+            left: Get.size.width * .05,
+            right: Get.size.width * .05,
+            child: Container(
+              width: Get.size.width * .4,
+              height: Get.size.height * .8,
+              //decoration: floatingContainerBoxDecoration(),
+              child: theLoginColumnBody(size),
             ),
           ),
         ],
       ),
     );
-  }
-
-  bool checkIfTheSizeAllowTheFloatingContainerToExist(BuildContext context) {
-    if (context.widthInches > 7.5) {
-      return true;
-    }
-    return false;
   }
 
   Widget putBackgroundImage(BuildContext context) {
@@ -174,36 +159,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  BoxDecoration floatingContainerBoxDecoration() {
-    return BoxDecoration(
-        color: Get.isDarkMode ? backGroundDarkColor : skinColorWhite,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: Get.isDarkMode
-            ? null
-            : const [
-                BoxShadow(
-                    offset: Offset(-2, -1),
-                    color: Colors.black12,
-                    spreadRadius: 0,
-                    blurRadius: 15),
-                BoxShadow(
-                    offset: Offset(6, 5),
-                    color: Colors.black26,
-                    spreadRadius: 01,
-                    blurRadius: 15),
-                BoxShadow(
-                    offset: Offset(-2, 5),
-                    color: Colors.black26,
-                    spreadRadius: 01,
-                    blurRadius: 15),
-                BoxShadow(
-                    offset: Offset(6, -1),
-                    color: Colors.black26,
-                    spreadRadius: 01,
-                    blurRadius: 15),
-              ]);
-  }
-
   MyButton theDoneButton(Sizes size) {
     return MyButton(
       mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
@@ -234,28 +189,61 @@ class LoginPage extends StatelessWidget {
 
   SingleChildScrollView theLoginColumnBody(Sizes size) {
     return SingleChildScrollView(
-      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        SizedBox(
-          height: Get.size.height * .1,
-        ),
-        AutoSizeText('Login'.tr,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          SizedBox(
+            height: Get.size.height * .1,
+          ),
+          AutoSizeText(
+            'Login'.tr,
             style: TextStyle(
                 color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor,
                 fontSize: size.appBarTextSize,
                 fontFamily: jostFontFamily,
-                fontWeight: FontWeight.w100)),
-        SizedBox(
-          height: Get.size.height * .04,
-        ),
-        emailTextFeild(size),
-        SizedBox(height: Get.size.height * .1),
-        passwordTextFeild(size),
-        SizedBox(height: Get.size.height * .1),
-        theDoneButton(size),
-        SizedBox(
-          height: Get.size.height * .1,
-        )
-      ]),
+                fontWeight: FontWeight.w100),
+          ),
+          SizedBox(
+            height: Get.size.height * .04,
+          ),
+          emailTextFeild(size),
+          SizedBox(height: Get.size.height * .1),
+          passwordTextFeild(size),
+          SizedBox(height: Get.size.height * .03),
+          moveToRegister(size),
+          SizedBox(height: Get.size.height * .1),
+          theDoneButton(size),
+          SizedBox(
+            height: Get.size.height * .1,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget moveToRegister(Sizes size) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          AutoSizeText(
+            "Don't have an account?".tr,
+            style:generalTextStyle(size.moveBetweenLoginandregisterText)),
+          GestureDetector(
+            child: AutoSizeText(
+              "Click hire".tr,
+              style: TextStyle(
+                  color: Get.isDarkMode
+                      ? Themes.customdarktheme.primaryColor
+                      : Themes.customlighttheme.primaryColor,
+                  fontSize: size.moveBetweenLoginandregisterText),
+            ),
+            onTap: () {
+              Get.offAllNamed('/Register');
+            },
+          ),
+        ],
+      ),
     );
   }
 }

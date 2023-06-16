@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sized_context/sized_context.dart';
 
 class Sizes {
+  late double moveBetweenLoginandregisterText;
   //the const var we will use in the app
   late double appBarIconSize; //done on web not on moblile.
   late double appBarTextSize; //done on web not on moblile.
@@ -70,23 +71,22 @@ class Sizes {
     }
   }
   void setSizesForMobile() {
+    moveBetweenLoginandregisterText=width*.04;
     //need a check.
-    smallEventCardHeight = height * .1;
-    smallEventCardWidth = width * .3;
-
-    print('set size for mobile');
+  smallEventCardHeight = height * .2;
+    smallEventCardWidth = width * .75;
     appBarTextFieldWidth =
         width * .8; //it's just an icon here so we not going to use it.
     wideNormalButtonTextSize = 18;
     wideNormalButtonWidth = width * .85;
     cardButtonTextSize = width * .1;
     normalButtonInsidePaddin = width * .08;
-    bigButtonTextSize = height * .06;
-    normalButtonTextSize = height * .04;
+    bigButtonTextSize = height * .04;
+    normalButtonTextSize = height * .035;
     textFieldTextSize = height * .04;
-    textFieldWidth = width * .7;
+    textFieldWidth = width * .8;
     appBarIconSize = width * .07;
-    appBarTextSize = width * .06;
+    appBarTextSize = width * .1;
     drinkCardWidth = width * .4;
     drinkCardHeight = height * .4;
     cardTitleTextSize = height * .03;
@@ -98,11 +98,11 @@ class Sizes {
     eventCardHeight = height * .45;
     floatButtonWidth = width * .08;
     floatButtonHeight = height * .06;
-    normalButtonHeight = height * .08;
+    normalButtonHeight = height * .06;
     normalButtonWidht = width * .5;
     bigButtonHeight = height * .2;
     bigButtonWidht = width * .3;
-  }
+ }
 
   void setSizesForComputer() {
     print('set size for computer');

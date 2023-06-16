@@ -27,7 +27,7 @@ class SplashItem extends StatelessWidget {
             height: Get.size.height * .02,
           ),
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal:size.width*.08 ),
+          padding:  EdgeInsets.symmetric(horizontal:size.width*.08 ),
             child: Image.asset(
               image,
               height: 300,
