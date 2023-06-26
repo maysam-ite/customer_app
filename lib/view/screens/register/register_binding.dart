@@ -8,4 +8,6 @@ class RegisterBinding implements Bindings {
   void dependencies() {
     Get.put(RegisterController());
   }
+  
 }
+

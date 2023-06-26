@@ -51,7 +51,7 @@ class RegisterPage extends StatelessWidget {
             top: Get.size.height * .1,
             left: Get.size.width * .05,
             right: Get.size.width * .05,
-            child: Container(
+            child: SizedBox(
               width: Get.size.width,
               height: Get.size.height,
               //decoration: floatingContainerBoxDecoration(),

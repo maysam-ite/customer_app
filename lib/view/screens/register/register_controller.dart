@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../constant/theme.dart';
 import '../../../data/Models/login_model.dart';
-import '../../widget/no_internet_page.dart';
 import 'register_service.dart';
 
 class RegisterController extends GetxController

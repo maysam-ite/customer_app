@@ -6,7 +6,6 @@ import 'constant/theme.dart';
 import 'data/service/pref_service.dart';
 import 'languages/translations.dart';
 import 'routs.dart';
-import 'view/screens/home/binding.dart';
 import 'view/screens/setting/language_controller.dart';
 
 SharedPreferences? sharedPreferences;
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: themeValue == "dark"
           ? Themes.customdarktheme
           : Themes.customlighttheme,
-      initialBinding: cBinding(),
+      // initialBinding: cBinding(),
       themeMode: ThemeMode
           .light, //to make the app change theme even if the device theme is dark.
       initialRoute: '/Home',
