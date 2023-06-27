@@ -1,45 +1,43 @@
-// import 'package:dashboard/data/service/pref_service.dart';
-import 'package:customer_app/main.dart';
 import 'package:get/get.dart';
 
-class OnBoardContoller extends GetxController {
-  List<Map<String, String>> pagedetals = [
+import '../../../main.dart';
+
+class OnBoardController extends GetxController {
+  final List<Map<String, String>> pageDetails = [
     {
       "title": "welcome to our app",
-      "image": "assets/images/small page background image.jpg"
+      "image": "assets/images/medium page background image.jpg"
     },
     {
       "title": "manage all the house with this system",
-      "image": "assets/images/small page background image.jpg"
+      "image": "assets/images/medium page background image.jpg"
     },
     {
       "title": "other thing need to rewrite",
-      "image": "assets/images/small page background image.jpg"
+      "image": "assets/images/medium page background image.jpg"
     },
     {
       "title": "other thing need to rewrite",
-      "image": "assets/images/small page background image.jpg"
-    }
+      "image": "assets/images/medium page background image.jpg"
+    },
   ];
-  // ignore: prefer_typing_uninitialized_variables
-  var pageindex;
-  @override
-  void onInit() async {
-    pageindex = 1.obs;
-    // PrefService store = PrefService();
-    // UserInformation.app_theme = await store.readString("theme") ?? "light";
-    // UserInformation.app_theme == "light"
-    //     ? Get.changeTheme(Themes.customlighttheme)
-    //     : Get.changeTheme(Themes.customdarktheme);
 
+  RxInt pageIndex = 1.obs;
+
+  @override
+  void onInit() {
     super.onInit();
   }
-  onpress()async{
-  if(await prefService.isContainKey('token')){
-    Get.offAllNamed('/Home');
-  }else{
-    Get.offNamed('/LoginPage');
+
+  void setPageIndex(int index) {
+    pageIndex.value = index;
   }
+
+  void onPress() async {
+    if (await prefService.isContainKey('token')) {
+      Get.offAllNamed('/Bar');
+    } else {
+      Get.offAllNamed('/Bar');
+    }
   }
-  
 }

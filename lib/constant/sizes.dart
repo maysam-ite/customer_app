@@ -71,9 +71,9 @@ class Sizes {
     }
   }
   void setSizesForMobile() {
-    moveBetweenLoginandregisterText=width*.04;
+    moveBetweenLoginandregisterText = width * .04;
     //need a check.
-  smallEventCardHeight = height * .2;
+    smallEventCardHeight = height * .2;
     smallEventCardWidth = width * .75;
     appBarTextFieldWidth =
         width * .8; //it's just an icon here so we not going to use it.
@@ -82,7 +82,7 @@ class Sizes {
     cardButtonTextSize = width * .1;
     normalButtonInsidePaddin = width * .08;
     bigButtonTextSize = height * .04;
-    normalButtonTextSize = height * .035;
+    normalButtonTextSize = height * .027;
     textFieldTextSize = height * .04;
     textFieldWidth = width * .8;
     appBarIconSize = width * .07;
@@ -102,7 +102,7 @@ class Sizes {
     normalButtonWidht = width * .5;
     bigButtonHeight = height * .2;
     bigButtonWidht = width * .3;
- }
+  }
 
   void setSizesForComputer() {
     print('set size for computer');

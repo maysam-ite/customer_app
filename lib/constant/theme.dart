@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 Color primaryColor =
     Colors.teal[300]!; //const Color.fromARGB(1, 43, 120, 97); //done
 Color lightHoverButtonColor = Colors.teal[400]!;
-Color woodBrownColor =
-    Colors.brown; // const Color.fromARGB(255, 54, 33, 20); //done
+Color woodBrownColor = Colors.blueGrey[400]!;
+//Colors.brown; // const Color.fromARGB(255, 54, 33, 20); //done
 Color? skinColorWhite =
     Colors.brown[50]; // const Color.fromARGB(255, 226, 212, 172); //done
 
@@ -16,7 +16,7 @@ Color darkPrimaryColor =
     Colors.teal[500]!; // Colors.red[500]!; //Colors.teal[900]!;
 Color darkHoverButtonColor =
     Colors.teal[600]!; // Colors.red[600]!; //Colors.teal[800]!;
-Color darkWoodBrownColor = Colors.redAccent[700]!;
+Color darkWoodBrownColor = Colors.blueGrey[800]!;
 Color backGroundDarkColor = Colors.black87;
 
 /*---------------*/

@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../../../constant/theme.dart';
 import '../../../data/Models/login_model.dart';
-import '../../widget/no_internet_page.dart';
 import 'login_service.dart';
 
 class LoginController extends GetxController
@@ -28,7 +27,7 @@ class LoginController extends GetxController
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
   }
-  
+
   void changePasswordSecure() {
     passwordSecure.value = !passwordSecure.value;
   }
@@ -52,9 +51,9 @@ class LoginController extends GetxController
       } else if (statuseRequest == StatuseRequest.validationfailuer) {
         snackBarForErrors();
       } else {
-       snackBarForErrors();
+        snackBarForErrors();
       }
-   }
+    }
     update();
   }
 
@@ -86,9 +85,8 @@ class LoginController extends GetxController
   whenLoginSuccess(response) async {
     Map<String, dynamic> data = response[
         'data']; // for getting a body of data from map and save a token in local dataBase
-      await prefService.createString(
-        'token', response['token']); // storing token
-    await prefService.createString('id',data['admin_id'].toString());
+    await prefService.createString('token', response['token']); // storing token
+    await prefService.createString('id', data['admin_id'].toString());
     Get.offNamed('/Home');
     update();
   }

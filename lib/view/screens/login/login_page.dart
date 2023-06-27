@@ -164,7 +164,8 @@ class LoginPage extends StatelessWidget {
       mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
       myRadius: size.buttonRadius,
       ontap: () {
-        controller.onpresslogin();
+        // controller.onpresslogin();
+        Get.offNamed('/Bar');
       },
       mywidth: size.normalButtonWidht,
       myheight: size.normalButtonHeight,
@@ -226,9 +227,8 @@ class LoginPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          AutoSizeText(
-            "Don't have an account?".tr,
-            style:generalTextStyle(size.moveBetweenLoginandregisterText)),
+          AutoSizeText("Don't have an account?".tr,
+              style: generalTextStyle(size.moveBetweenLoginandregisterText)),
           GestureDetector(
             child: AutoSizeText(
               "Click hire".tr,
