@@ -257,7 +257,8 @@ class RegisterPage extends StatelessWidget {
       mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
       myRadius: size.buttonRadius,
       ontap: () {
-        controller.onpresslogin();
+        // controller.onpresslogin();
+        Get.offAllNamed('/LoginPage');
       },
       mywidth: size.normalButtonWidht,
       myheight: size.normalButtonHeight,
@@ -277,6 +278,32 @@ class RegisterPage extends StatelessWidget {
                   fontFamily: jostFontFamily,
                   color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
             ),
+    );
+  }
+Widget phoneNumberTextFeild(Sizes size) {
+    return CostumTextField(
+      labelStyle: TextStyle(
+          color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
+      widthOnTheScreen: size.textFieldWidth,
+      onsaved: (value) {
+        controller.phoneNumber = value!;
+      },
+      hint: 'enter your phone number'.tr,
+      hintStyle: TextStyle(
+          fontFamily: jostFontFamily,
+          color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
+      label: "phone number".tr,
+      prefixIcon: const Icon(
+        Icons.phone,
+        // color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
+      ),
+      sucer: false,
+      validat: (value) {
+        if(value!.length<10 && value.length>10){
+          return "The phone number isn't correct";
+        }
+        return null;
+      },
     );
   }
 
@@ -307,11 +334,8 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  SingleChildScrollView theLoginColumnBody(Sizes size) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
+  Widget theLoginColumnBody(Sizes size) {
+    return ListView(children: [
           SizedBox(
             height: Get.size.height * .03,
           ),
@@ -332,6 +356,8 @@ class RegisterPage extends StatelessWidget {
           SizedBox(height: Get.size.height * .05),
           emailTextFeild(size),
           SizedBox(height: Get.size.height * .05),
+          phoneNumberTextFeild(size),
+          SizedBox(height: Get.size.height * .05),
           passwordTextFeild(size),
           SizedBox(height: Get.size.height * .05),
           confirmPasswordTextFeild(size),
@@ -343,7 +369,7 @@ class RegisterPage extends StatelessWidget {
             height: Get.size.height * .05,
           ),
         ],
-      ),
+      
     );
   }
 }

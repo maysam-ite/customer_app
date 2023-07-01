@@ -9,21 +9,20 @@ import '../../../data/Models/login_model.dart';
 import '../../../data/checkInternet/check_internet.dart';
 
 class RegisterService {
-  Future<Either<StatuseRequest, Map>> register(LoginModel model) async {
+  Future<Either<StatuseRequest, Map>> register(Map<String,String> data, String token) async {
     //Either for return two data type in the same time
     try {
       if (await checkInternet()) {
-        Uri url = Uri.parse(ServerConstApis.adminLogin);
+        Uri url = Uri.parse(ServerConstApis.signUp);
+        print(" start service");
         http.Response response = await http.post(
           url,
-          body: {
-            "email": model.email,
-            "password": model.password,
-          },
+          body:data,
           headers: {"Access-Control-Allow-Origin": "*"},
         );
         print("/////////////////////////////////////");
         print(response.body);
+        print(response.statusCode);
         if (response.statusCode == 200 || response.statusCode == 201) {
           final responsebody = jsonDecode(response.body);
           return Right(responsebody);

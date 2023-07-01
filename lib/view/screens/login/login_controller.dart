@@ -21,7 +21,7 @@ class LoginController extends GetxController
 
   @override
   void onInit() async {
-    password = '123';
+    password = '';
     email = '';
     formstate = GlobalKey<FormState>();
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
@@ -38,14 +38,11 @@ class LoginController extends GetxController
       formdata.save();
       statuseRequest = StatuseRequest.loading;
       update();
-      LoginModel model = LoginModel(password: password, email: email);
-      dynamic response = await logindata(
-          model); // check if the return data is statuseRequest or real data
+      dynamic response = await logindata(); // check if the return data is statuseRequest or real data
       statuseRequest = handlingData(response); //return the statuseResponse
       if (statuseRequest == StatuseRequest.success) {
-        if (response['msg'] == "Logged in Successfully") {
           whenLoginSuccess(response);
-        }
+       
       } else if (statuseRequest == StatuseRequest.authfailuer) {
         snackBarForErrors();
       } else if (statuseRequest == StatuseRequest.validationfailuer) {
@@ -67,9 +64,13 @@ class LoginController extends GetxController
         duration: const Duration(seconds: 5));
   }
 
-  logindata(LoginModel model) async {
+  logindata() async {
+    Map<String,String>data={
+    "email": "email3@gmail.com",
+    "password":"12345678"
+};
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
-        await service.login(model);
+        await service.login(data);
 
     return response.fold((l) => l, (r) => r);
   }
@@ -83,11 +84,8 @@ class LoginController extends GetxController
   }
 
   whenLoginSuccess(response) async {
-    Map<String, dynamic> data = response[
-        'data']; // for getting a body of data from map and save a token in local dataBase
     await prefService.createString('token', response['token']); // storing token
-    await prefService.createString('id', data['admin_id'].toString());
-    Get.offNamed('/Home');
+    Get.offNamed('/EventInfo');
     update();
   }
 }

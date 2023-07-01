@@ -4,8 +4,7 @@ import 'package:customer_app/main.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../constant/theme.dart';
-import '../../../data/Models/login_model.dart';
+import '../../widget/snak_bar_for_errors.dart';
 import 'register_service.dart';
 
 class RegisterController extends GetxController
@@ -15,7 +14,7 @@ class RegisterController extends GetxController
   late String firstName;
   late String lastName;
   late String confirmPassword;
-
+  late String phoneNumber;
   @override
   StatuseRequest? statuseRequest = StatuseRequest.init;
   late RxBool passwordSecure = true.obs;
@@ -30,6 +29,7 @@ class RegisterController extends GetxController
     firstName = '';
     lastName = '';
     password = '';
+    phoneNumber='';
     email = '';
     // statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
@@ -44,45 +44,38 @@ class RegisterController extends GetxController
   }
 
   void onpresslogin() async {
-    print(confirmPassword);
-    print(password);
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
-      /*   statuseRequest = StatuseRequest.loading;
+      statuseRequest = StatuseRequest.loading;
       update();
-      LoginModel model = LoginModel(password: password, email: email);
-      dynamic response = await logindata(
-          model); // check if the return data is statuseRequest or real data
+
+      dynamic response = await signupdata(); // check if the return data is statuseRequest or real data
       statuseRequest = handlingData(response); //return the statuseResponse
       if (statuseRequest == StatuseRequest.success) {
-        if (response['msg'] == "Logged in Successfully") {
-          whenLoginSuccess(response);
-        }
+          whenSignUpSuccess(response);
+        
       } else if (statuseRequest == StatuseRequest.authfailuer) {
-        snackBarForErrors();
+        snackBarForErrors("Auth Error", "Please try again");
       } else if (statuseRequest == StatuseRequest.validationfailuer) {
-        snackBarForErrors();
+        snackBarForErrors("Your input isn't valid", "Please try again");
       } else {
-        snackBarForErrors();
-      }*/
+        snackBarForErrors("Server Error", "Please try later");
+      }
     }
     update();
   }
 
-  SnackbarController snackBarForErrors() {
-    return Get.snackbar(
-        "Incorrect email or password".tr, ///// adding for translate  done
-        "Try entering your data again".tr, //// adding for translate  done
-        snackPosition: SnackPosition.TOP,
-        colorText: Get.isDarkMode ? skinColorWhite : backGroundDarkColor,
-        backgroundColor: Get.isDarkMode ? backGroundDarkColor : skinColorWhite,
-        duration: const Duration(seconds: 5));
-  }
-
-  logindata(LoginModel model) async {
+  signupdata() async {
+    Map<String,String> data={
+     "first_name":firstName,
+     "last_name":lastName,
+     "email":email,
+     "password":password,
+     "phone_number":phoneNumber
+    };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
-        await service.register(model);
+        await service.register(data,"");
 
     return response.fold((l) => l, (r) => r);
   }
@@ -95,12 +88,8 @@ class RegisterController extends GetxController
     }
   }
 
-  whenLoginSuccess(response) async {
-    Map<String, dynamic> data = response[
-        'data']; // for getting a body of data from map and save a token in local dataBase
-    await prefService.createString('token', response['token']); // storing token
-    await prefService.createString('id', data['admin_id'].toString());
-    Get.offNamed('/Home');
-    update();
+  whenSignUpSuccess(response) async {
+    Get.offNamed('/LoginPage');
+   
   }
 }
