@@ -8,100 +8,12 @@ import '../../widget/animation_title.dart';
 import '../../widget/bottom_nav_bar.dart';
 import '../../widget/drawer.dart';
 import '../../widget/drink_card.dart';
-import '../../widget/event_card.dart';
 import '../../widget/general_text_style.dart';
+import '../events_page/event_page.dart';
 import 'bar_page_controller.dart';
 
 class BarPage extends StatelessWidget {
   BarPage({Key? key}) : super(key: key);
-  final List<EventCard> events = [
-    EventCard(
-      event: Event(
-        artistsNames: ['artist one', 'artist two', 'artist three'],
-        availablePlaces: 80,
-        beginDate: 'sometime',
-        description: 'very good',
-        eventName: 'Event one',
-        imagesNames: [
-          'assets/images/concert.png',
-          'assets/images/medium page background image.jpg',
-          'assets/images/tickets.png'
-        ],
-        ticketsPrice: 50,
-      ),
-    ),
-    EventCard(
-      event: Event(
-        artistsNames: ['artist one', 'artist two', 'artist three'],
-        availablePlaces: 80,
-        beginDate: 'sometime',
-        description: 'very good',
-        eventName: 'Event two',
-        imagesNames: [
-          'assets/images/concert.png',
-          'assets/images/medium page background image.jpg',
-          'assets/images/tickets.png'
-        ],
-        ticketsPrice: 50,
-      ),
-    ),
-    EventCard(
-        event: Event(
-      artistsNames: ['artist one', 'artist two', 'artist three'],
-      availablePlaces: 80,
-      beginDate: 'sometime',
-      description: 'very good',
-      eventName: 'Event three',
-      imagesNames: [
-        'assets/images/concert.png',
-        'assets/images/medium page background image.jpg',
-        'assets/images/tickets.png'
-      ],
-      ticketsPrice: 50,
-    )),
-    EventCard(
-        event: Event(
-      artistsNames: ['artist one', 'artist two', 'artist three'],
-      availablePlaces: 80,
-      beginDate: 'sometime',
-      description: 'very good',
-      eventName: 'Event four',
-      imagesNames: [
-        'assets/images/concert.png',
-        'assets/images/medium page background image.jpg',
-        'assets/images/tickets.png'
-      ],
-      ticketsPrice: 50,
-    )),
-    EventCard(
-        event: Event(
-      artistsNames: ['artist one', 'artist two', 'artist three'],
-      availablePlaces: 80,
-      beginDate: 'sometime',
-      description: 'very good',
-      eventName: 'Event five',
-      imagesNames: [
-        'assets/images/concert.png',
-        'assets/images/medium page background image.jpg',
-        'assets/images/tickets.png'
-      ],
-      ticketsPrice: 50,
-    )),
-    EventCard(
-        event: Event(
-      artistsNames: ['artist one', 'artist two', 'artist three'],
-      availablePlaces: 80,
-      beginDate: 'sometime',
-      description: 'very good',
-      eventName: 'Event six',
-      imagesNames: [
-        'assets/images/concert.png',
-        'assets/images/medium page background image.jpg',
-        'assets/images/tickets.png'
-      ],
-      ticketsPrice: 50,
-    )),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -172,18 +84,6 @@ class BarPage extends StatelessWidget {
       buildBarGridView(Colors.blue),
     ];
     return ([list[controller.page.value]]);
-  }
-
-  Widget buildEventGridView() {
-    return ListView.builder(
-      itemCount: events.length - 1,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-          child: events[index],
-        );
-      },
-    );
   }
 
   Widget buildEmptyListForNew() {

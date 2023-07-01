@@ -4,8 +4,6 @@ import 'package:customer_app/main.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-
 import '../../../constant/theme.dart';
 import '../../../data/Models/login_model.dart';
 import 'register_service.dart';
@@ -23,40 +21,35 @@ class RegisterController extends GetxController
   late RxBool passwordSecure = true.obs;
   late RxBool confirmPasswordSecure = true.obs;
   RegisterService service = RegisterService();
- GlobalKey<FormState> formstate=GlobalKey<FormState>();
-late RxString imagePath;
+  GlobalKey<FormState> formstate = GlobalKey<FormState>();
+  late RxString imagePath;
   @override
   void onInit() async {
-    imagePath=''.obs;
+    imagePath = ''.obs;
     confirmPassword = '';
-    firstName='';
-    lastName='';
+    firstName = '';
+    lastName = '';
     password = '';
     email = '';
     // statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
   }
-   Future pickimage() async {
-    final myfile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (myfile != null) {
-      imagePath.value = myfile.path;
-    }
-  }
 
   void changePasswordSecure() {
     passwordSecure.value = !passwordSecure.value;
   }
+
   void changeConfirmPasswordSecure() {
     confirmPasswordSecure.value = !confirmPasswordSecure.value;
   }
 
   void onpresslogin() async {
-     print(confirmPassword);
-      print(password);
+    print(confirmPassword);
+    print(password);
     FormState? formdata = formstate.currentState;
     if (formdata!.validate()) {
       formdata.save();
-   /*   statuseRequest = StatuseRequest.loading;
+      /*   statuseRequest = StatuseRequest.loading;
       update();
       LoginModel model = LoginModel(password: password, email: email);
       dynamic response = await logindata(
@@ -73,7 +66,6 @@ late RxString imagePath;
       } else {
         snackBarForErrors();
       }*/
-     
     }
     update();
   }

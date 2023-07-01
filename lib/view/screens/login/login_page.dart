@@ -231,7 +231,7 @@ class LoginPage extends StatelessWidget {
               style: generalTextStyle(size.moveBetweenLoginandregisterText)),
           GestureDetector(
             child: AutoSizeText(
-              "Click hire".tr,
+              "Click here".tr,
               style: TextStyle(
                   color: Get.isDarkMode
                       ? Themes.customdarktheme.primaryColor

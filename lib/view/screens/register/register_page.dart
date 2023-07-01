@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:customer_app/constant/sizes.dart';
 import 'package:customer_app/constant/status_request.dart';
@@ -282,51 +280,18 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget pickimage() {
-    return Column(
-      children: [
-        ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color?>(
-                Get.isDarkMode ? darkPrimaryColor : primaryColor),
-          ),
-          onPressed: () {
-            controller.pickimage();
-          },
-          child: Text(
-            'Select your image'.tr,
-            style: generalTextStyle(null),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Obx(
-          () => controller.imagePath.value != ''
-              ? SizedBox(
-                  width: 200,
-                  height: 200,
-                  child: Image.file(
-                    File(controller.imagePath.value),
-                    fit: BoxFit.contain,
-                  ),
-                )
-              : const SizedBox(),
-        )
-      ],
-    );
-  }
-
   Widget moveToLogin(Sizes size) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           AutoSizeText(
-            "Alredy have an account?".tr,
+            "Already have an account?".tr,
             style: generalTextStyle(size.moveBetweenLoginandregisterText),
           ),
           GestureDetector(
             child: AutoSizeText(
-              "Click hire".tr,
+              "Click here".tr,
               style: TextStyle(
                   color: Get.isDarkMode
                       ? Themes.customdarktheme.primaryColor
@@ -334,7 +299,7 @@ class RegisterPage extends StatelessWidget {
                   fontSize: size.moveBetweenLoginandregisterText),
             ),
             onTap: () {
-              Get.offAllNamed('/Login');
+              Get.offAllNamed('/LoginPage');
             },
           ),
         ],
@@ -372,8 +337,6 @@ class RegisterPage extends StatelessWidget {
           confirmPasswordTextFeild(size),
           SizedBox(height: Get.size.height * .03),
           moveToLogin(size),
-          SizedBox(height: Get.size.height * .05),
-          pickimage(),
           SizedBox(height: Get.size.height * .06),
           theDoneButton(size),
           SizedBox(

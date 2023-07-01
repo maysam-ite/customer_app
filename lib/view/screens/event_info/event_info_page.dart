@@ -21,9 +21,7 @@ class EventInfo extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
           label: TextButton(
-              onPressed: () {
-                Get.offNamed('/Bar');
-              },
+              onPressed: () {},
               child:
                   Text('make a reservation'.tr, style: generalTextStyle(16)))),
     );

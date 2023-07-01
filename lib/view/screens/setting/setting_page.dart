@@ -249,7 +249,7 @@ class Setting extends StatelessWidget {
                   onTap: () {
                     themeController.changeTheme();
                     Get.back();
-                    Future.delayed(const Duration(milliseconds: 30), () {
+                    Future.delayed(const Duration(milliseconds: 80), () {
                       Get.offAllNamed('/Bar');
                     });
                   },
