@@ -40,8 +40,6 @@ class BottomNavBarState extends State<BottomNavBar> {
       animationDuration: const Duration(milliseconds: 500),
       onTap: (index) {
         setState(() {
-          // print('index :');
-          // print(index);
           controller.changePage(index);
         });
       },

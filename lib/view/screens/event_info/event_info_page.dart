@@ -12,6 +12,7 @@ class EventInfo extends StatelessWidget {
   EventInfo({super.key});
   final Event event = Get.arguments;
   final EventCardController controller = Get.find();
+  final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -115,11 +116,11 @@ class EventInfo extends StatelessWidget {
 
   Widget buildImagesList(Sizes size) {
     return AnimatedBuilder(
-      animation: controller.pageController,
+      animation: pageController, //controller.pageController,
       builder: (context, child) {
         return PageView.builder(
           onPageChanged: controller.setPageIndex,
-          controller: controller.pageController,
+          controller: pageController, //controller.pageController,
           itemCount: event.imagesNames.length,
           itemBuilder: (context, index) {
             return ClipRRect(

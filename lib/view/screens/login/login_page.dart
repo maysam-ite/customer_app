@@ -228,7 +228,8 @@ class LoginPage extends StatelessWidget {
       child: Row(
         children: [
           AutoSizeText("Don't have an account?".tr,
-              style: generalTextStyle(size.moveBetweenLoginandregisterText)),
+              style: generalTextStyle(
+                  null /*size.moveBetweenLoginandregisterText*/)),
           GestureDetector(
             child: AutoSizeText(
               "Click here".tr,
@@ -236,7 +237,7 @@ class LoginPage extends StatelessWidget {
                   color: Get.isDarkMode
                       ? Themes.customdarktheme.primaryColor
                       : Themes.customlighttheme.primaryColor,
-                  fontSize: size.moveBetweenLoginandregisterText),
+                  fontSize: null /*size.moveBetweenLoginandregisterText*/),
             ),
             onTap: () {
               Get.offAllNamed('/Register');

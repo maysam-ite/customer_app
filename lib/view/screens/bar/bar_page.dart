@@ -10,6 +10,7 @@ import '../../widget/drawer.dart';
 import '../../widget/drink_card.dart';
 import '../../widget/general_text_style.dart';
 import '../events_page/event_page.dart';
+import '../places/first_places_page.dart';
 import 'bar_page_controller.dart';
 
 class BarPage extends StatelessWidget {
@@ -44,7 +45,7 @@ class BarPage extends StatelessWidget {
                 ),
               )),
           extendBody: true,
-          appBar: createAppBar(size),
+          appBar: createAppBar(size, controller.page.value),
           drawer: ProjectDrawer(),
           body: SafeArea(
             child: Stack(
@@ -80,7 +81,7 @@ class BarPage extends StatelessWidget {
   List<Widget> selectPage(BarPageController controller) {
     List<Widget> list = [
       buildEventGridView(),
-      buildEmptyListForNew(),
+      places(),
       buildBarGridView(Colors.blue),
     ];
     return ([list[controller.page.value]]);
@@ -110,8 +111,16 @@ class BarPage extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget? createAppBar(Sizes size) {
+  PreferredSizeWidget? createAppBar(Sizes size, int index) {
     return AppBar(
+      bottom: index == 1
+          ? const TabBar(tabs: [
+              Tab(
+                text: 'Section one',
+              ),
+              Tab(text: 'Section two'),
+            ])
+          : null,
       elevation: 0.4,
       backgroundColor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
       title: AnimationAppBarTitle(title: 'Customer app'.tr),
