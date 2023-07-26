@@ -1,6 +1,5 @@
 import 'package:customer_app/constant/status_request.dart';
 import 'package:customer_app/general_controllers/statuse_request_controller.dart';
-import 'package:customer_app/main.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +28,7 @@ class RegisterController extends GetxController
     firstName = '';
     lastName = '';
     password = '';
-    phoneNumber='';
+    phoneNumber = '';
     email = '';
     // statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
@@ -50,11 +49,11 @@ class RegisterController extends GetxController
       statuseRequest = StatuseRequest.loading;
       update();
 
-      dynamic response = await signupdata(); // check if the return data is statuseRequest or real data
+      dynamic response =
+          await signupdata(); // check if the return data is statuseRequest or real data
       statuseRequest = handlingData(response); //return the statuseResponse
       if (statuseRequest == StatuseRequest.success) {
-          whenSignUpSuccess(response);
-        
+        whenSignUpSuccess(response);
       } else if (statuseRequest == StatuseRequest.authfailuer) {
         snackBarForErrors("Auth Error", "Please try again");
       } else if (statuseRequest == StatuseRequest.validationfailuer) {
@@ -67,15 +66,15 @@ class RegisterController extends GetxController
   }
 
   signupdata() async {
-    Map<String,String> data={
-     "first_name":firstName,
-     "last_name":lastName,
-     "email":email,
-     "password":password,
-     "phone_number":phoneNumber
+    Map<String, String> data = {
+      "first_name": firstName,
+      "last_name": lastName,
+      "email": email,
+      "password": password,
+      "phone_number": phoneNumber
     };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
-        await service.register(data,"");
+        await service.register(data, "");
 
     return response.fold((l) => l, (r) => r);
   }
@@ -90,6 +89,5 @@ class RegisterController extends GetxController
 
   whenSignUpSuccess(response) async {
     Get.offNamed('/LoginPage');
-   
   }
 }

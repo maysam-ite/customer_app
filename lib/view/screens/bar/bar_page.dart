@@ -45,7 +45,7 @@ class BarPage extends StatelessWidget {
                 ),
               )),
           extendBody: true,
-          appBar: createAppBar(size, controller.page.value),
+          appBar: createAppBar(size, controller.page),
           drawer: ProjectDrawer(),
           body: SafeArea(
             child: Stack(
@@ -87,12 +87,6 @@ class BarPage extends StatelessWidget {
     return ([list[controller.page.value]]);
   }
 
-  Widget buildEmptyListForNew() {
-    return ListView(
-      children: [],
-    );
-  }
-
   Widget buildBarGridView(Color? color) {
     return GridView.builder(
       padding: const EdgeInsets.all(16),
@@ -111,31 +105,34 @@ class BarPage extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget? createAppBar(Sizes size, int index) {
-    return AppBar(
-      bottom: index == 1
-          ? const TabBar(tabs: [
-              Tab(
-                text: 'Section one',
+  PreferredSizeWidget? createAppBar(Sizes size, RxInt pageNumber) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(kToolbarHeight * 2),
+      child: Obx(() => AppBar(
+            bottom: pageNumber.value == 1
+                ? TabBar(tabs: [
+                    Tab(
+                      text: 'Section one'.tr,
+                    ),
+                    Tab(text: 'Section two'.tr),
+                  ])
+                : null,
+            elevation: 0.4,
+            backgroundColor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
+            title: AnimationAppBarTitle(title: 'Customer app'.tr),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor,
+                  size: size.appBarIconSize,
+                ),
+                onPressed: () {
+                  // Perform search action
+                },
               ),
-              Tab(text: 'Section two'),
-            ])
-          : null,
-      elevation: 0.4,
-      backgroundColor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
-      title: AnimationAppBarTitle(title: 'Customer app'.tr),
-      actions: [
-        IconButton(
-          icon: Icon(
-            Icons.search,
-            color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor,
-            size: size.appBarIconSize,
-          ),
-          onPressed: () {
-            // Perform search action
-          },
-        ),
-      ],
+            ],
+          )),
     );
   }
 }

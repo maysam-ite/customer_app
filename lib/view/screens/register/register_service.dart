@@ -5,11 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:dartz/dartz.dart';
 
 import '../../../constant/server_const.dart';
-import '../../../data/Models/login_model.dart';
 import '../../../data/checkInternet/check_internet.dart';
 
 class RegisterService {
-  Future<Either<StatuseRequest, Map>> register(Map<String,String> data, String token) async {
+  Future<Either<StatuseRequest, Map>> register(
+      Map<String, String> data, String token) async {
     //Either for return two data type in the same time
     try {
       if (await checkInternet()) {
@@ -17,7 +17,7 @@ class RegisterService {
         print(" start service");
         http.Response response = await http.post(
           url,
-          body:data,
+          body: data,
           headers: {"Access-Control-Allow-Origin": "*"},
         );
         print("/////////////////////////////////////");

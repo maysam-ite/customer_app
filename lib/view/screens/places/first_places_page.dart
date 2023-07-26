@@ -1,46 +1,30 @@
 import 'package:customer_app/constant/theme.dart';
-import 'package:customer_app/view/widget/general_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../main.dart';
 import '../../widget/table_number_container.dart';
 
 Widget places() {
-  return Column(
+  return TabBarView(
     children: [
-      // Row(
-      //   mainAxisAlignment: MainAxisAlignment.start,
-      //   children: [
-      //     createAppBarContainer('first regone', () {}),
-      //     createAppBarContainer('second regone', () {}),
-      //   ],
-      // ),
-      placesBody(),
+      Expanded(
+        child: Column(
+          children: [
+            firstPlacesBody(),
+          ],
+        ),
+      ),
+      Expanded(
+        child: Column(
+          children: [secondPlacesBody()],
+        ),
+      ),
     ],
   );
 }
 
-Widget createAppBarContainer(String title, Function()? onPressed) {
-  return GestureDetector(
-    onTap: onPressed,
-    child: Container(
-      height: 50,
-      width: Get.size.width * .5,
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Get.isDarkMode ? skinColorWhite! : backGroundDarkColor,
-              width: 0.5),
-          color: Get.isDarkMode ? darkPrimaryColor : primaryColor),
-      child: Center(
-          child: Text(
-        'title',
-        style: generalTextStyle(null),
-      )),
-    ),
-  );
-}
-
-Widget placesBody() {
+Widget firstPlacesBody() {
   return SizedBox(
     height: Get.size.height * .65,
     width: Get.size.width * .98,
@@ -58,6 +42,34 @@ Widget placesBody() {
   );
 }
 
+Widget secondPlacesBody() {
+  return SizedBox(
+    height: Get.size.height * .65,
+    width: Get.size.width * .98,
+    child: Stack(
+      children: [
+        table(Get.size.height * .5 / 2 - 30, null, 100, null, [1, 2, 3], true),
+        table(Get.size.height * .5 / 2 - 30, null, 10, null, [4, 5, 6], true),
+        table(Get.size.height * .5 / 2 - 30, null, 190, null, [7, 8, 9], true),
+        singlePart(null, Get.size.height * .6 / 2 - 90, 10, null,
+            10), //this one should be in the top wall
+        singlePart(null, Get.size.height * .6 / 2 - 90, null, 10,
+            11), //this one should be in the top wall
+        singlePart(null, Get.size.height * .6 - 60, 10, null,
+            12), //this one should be in the top wall
+        singlePart(null, Get.size.height * .6 - 60, 10, null,
+            12), //this one should be in the bottom wall
+        singlePart(null, Get.size.height * .6 - 60, 10, null,
+            12), //this one should be in the bottom wall
+        singlePart(null, Get.size.height * .6 - 60, 10, null,
+            12), //this one should be in the start wall in the left
+        singlePart(null, Get.size.height * .6 - 60, 10, null,
+            12), //this one should be in the start wall in the right
+      ],
+    ),
+  );
+}
+
 Widget middelTable(List<int> sectionsNumbers) {
   return Positioned(
     top: Get.size.height * .65 / 2,
@@ -66,14 +78,66 @@ Widget middelTable(List<int> sectionsNumbers) {
       children: [
         Row(
           children: [
-            middleTablePart(100, 0, 0, 0, sectionsNumbers[0]),
-            middleTablePart(0, 100, 0, 0, sectionsNumbers[1]),
+            middleTablePart(
+                sharedPreferences!.getString('lang') == 'en'
+                    ? 100
+                    : sharedPreferences!.getString('lang') == 'ar'
+                        ? 0
+                        : 100,
+                sharedPreferences!.getString('lang') == 'en'
+                    ? 0
+                    : sharedPreferences!.getString('lang') == 'ar'
+                        ? 100
+                        : 0,
+                0,
+                0,
+                sectionsNumbers[0]),
+            middleTablePart(
+                sharedPreferences!.getString('lang') == 'en'
+                    ? 0
+                    : sharedPreferences!.getString('lang') == 'ar'
+                        ? 100
+                        : 0,
+                sharedPreferences!.getString('lang') == 'en'
+                    ? 100
+                    : sharedPreferences!.getString('lang') == 'ar'
+                        ? 0
+                        : 100,
+                0,
+                0,
+                sectionsNumbers[1]),
           ],
         ),
         Row(
           children: [
-            middleTablePart(0, 0, 0, 100, sectionsNumbers[3]),
-            middleTablePart(0, 0, 100, 0, sectionsNumbers[2]),
+            middleTablePart(
+                0,
+                0,
+                sharedPreferences!.getString('lang') == 'en'
+                    ? 0
+                    : sharedPreferences!.getString('lang') == 'ar'
+                        ? 100
+                        : 0,
+                sharedPreferences!.getString('lang') == 'en'
+                    ? 100
+                    : sharedPreferences!.getString('lang') == 'ar'
+                        ? 0
+                        : 100,
+                sectionsNumbers[3]),
+            middleTablePart(
+                0,
+                0,
+                sharedPreferences!.getString('lang') == 'en'
+                    ? 100
+                    : sharedPreferences!.getString('lang') == 'ar'
+                        ? 0
+                        : 100,
+                sharedPreferences!.getString('lang') == 'en'
+                    ? 0
+                    : sharedPreferences!.getString('lang') == 'ar'
+                        ? 100
+                        : 0,
+                sectionsNumbers[2]),
           ],
         ),
       ],

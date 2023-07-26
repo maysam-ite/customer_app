@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/theme.dart';
-import '../../../data/Models/login_model.dart';
 import 'login_service.dart';
 
 class LoginController extends GetxController
@@ -38,11 +37,11 @@ class LoginController extends GetxController
       formdata.save();
       statuseRequest = StatuseRequest.loading;
       update();
-      dynamic response = await logindata(); // check if the return data is statuseRequest or real data
+      dynamic response =
+          await logindata(); // check if the return data is statuseRequest or real data
       statuseRequest = handlingData(response); //return the statuseResponse
       if (statuseRequest == StatuseRequest.success) {
-          whenLoginSuccess(response);
-       
+        whenLoginSuccess(response);
       } else if (statuseRequest == StatuseRequest.authfailuer) {
         snackBarForErrors();
       } else if (statuseRequest == StatuseRequest.validationfailuer) {
@@ -65,10 +64,10 @@ class LoginController extends GetxController
   }
 
   logindata() async {
-    Map<String,String>data={
-    "email": "email3@gmail.com",
-    "password":"12345678"
-};
+    Map<String, String> data = {
+      "email": "email3@gmail.com",
+      "password": "12345678"
+    };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
         await service.login(data);
 
