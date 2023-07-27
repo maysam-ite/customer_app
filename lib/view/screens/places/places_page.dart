@@ -48,9 +48,9 @@ Widget secondPlacesBody() {
     width: Get.size.width * .98,
     child: Stack(
       children: [
-        table(Get.size.height * .5 / 2 - 30, null, 100, null, [1, 2, 3], true),
-        table(Get.size.height * .5 / 2 - 30, null, 10, null, [4, 5, 6], true),
-        table(Get.size.height * .5 / 2 - 30, null, 190, null, [7, 8, 9], true),
+        table(Get.size.height * .5 / 2 - 30, null, 100, null, [1, 2, 3], false),
+        table(Get.size.height * .5 / 2 - 30, null, 10, null, [4, 5, 6], false),
+        table(Get.size.height * .5 / 2 - 30, null, 190, null, [7, 8, 9], false),
         singlePart(null, Get.size.height * .6 / 2 - 90, 10, null,
             10), //this one should be in the top wall
         singlePart(null, Get.size.height * .6 / 2 - 90, null, 10,

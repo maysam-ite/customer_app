@@ -7,6 +7,8 @@ import '../../../constant/sizes.dart';
 import '../../../constant/theme.dart';
 import '../../widget/event_card.dart';
 import '../../widget/general_text_style.dart';
+import '../../widget/new_event_card.dart';
+import '../make_reservation_dialog/make_reservation_dialog_view.dart';
 
 class EventInfo extends StatelessWidget {
   EventInfo({super.key});
@@ -22,9 +24,11 @@ class EventInfo extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
           label: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                showMakeResrvationDialog(context);
+              },
               child:
-                  Text('make a reservation'.tr, style: generalTextStyle(16)))),
+                  Text('Make a reservation'.tr, style: generalTextStyle(16)))),
     );
   }
 
@@ -90,7 +94,7 @@ class EventInfo extends StatelessWidget {
           elementDivider(),
           const SizedBox(height: 3),
           setEventINfo(
-            'Date: '.tr + event.beginDate,
+            '${'Date: '.tr}${event.beginDate.dayNumber}/${event.beginDate.month}/${event.beginDate.year}',
           ),
           elementDivider(),
           const SizedBox(height: 3),
@@ -171,6 +175,20 @@ class EventInfo extends StatelessWidget {
             ? (Get.isDarkMode ? darkPrimaryColor : primaryColor)
             : const Color(0xFFD8D8D8),
       ),
+    );
+  }
+
+  void showMakeResrvationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          clipBehavior: Clip.antiAlias,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          child: const MakeReservation(),
+        );
+      },
     );
   }
 }

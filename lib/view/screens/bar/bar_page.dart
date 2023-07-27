@@ -107,7 +107,9 @@ class BarPage extends StatelessWidget {
 
   PreferredSizeWidget? createAppBar(Sizes size, RxInt pageNumber) {
     return PreferredSize(
-      preferredSize: const Size.fromHeight(kToolbarHeight * 2),
+      preferredSize: Size.fromHeight(pageNumber.value == 1
+          ? kToolbarHeight * 2
+          : kToolbarHeight), //there is a problem here that I can't rebuild the size of the appbar.
       child: Obx(() => AppBar(
             bottom: pageNumber.value == 1
                 ? TabBar(tabs: [

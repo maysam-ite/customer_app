@@ -1,45 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../widget/event_card.dart';
+import '../../widget/new_event_card.dart';
 
-final List<EventCard> events = [
-  EventCard(
-    event: Event(
-      artistsNames: ['artist one', 'artist two', 'artist three'],
-      availablePlaces: 80,
-      beginDate: 'sometime',
-      description: 'very good',
-      eventName: 'Event one',
-      imagesNames: [
-        'assets/images/concert.png',
-        'assets/images/medium page background image.jpg',
-        'assets/images/tickets.png'
-      ],
-      ticketsPrice: 50,
-    ),
-  ),
-  EventCard(
-    event: Event(
-      artistsNames: ['artist one', 'artist two', 'artist three'],
-      availablePlaces: 80,
-      beginDate: 'sometime',
-      description: 'very good',
-      eventName: 'Event two',
-      imagesNames: [
-        'assets/images/concert.png',
-        'assets/images/medium page background image.jpg',
-        'assets/images/tickets.png'
-      ],
-      ticketsPrice: 50,
-    ),
-  ),
-  EventCard(
+final List<NewEventCard> events = [
+  NewEventCard(
       event: Event(
     artistsNames: ['artist one', 'artist two', 'artist three'],
     availablePlaces: 80,
-    beginDate: 'sometime',
+    beginDate: Date(
+        dayName: 'sunday',
+        dayNumber: '9',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
     description: 'very good',
-    eventName: 'Event three',
+    eventName: 'Event one',
     imagesNames: [
       'assets/images/concert.png',
       'assets/images/medium page background image.jpg',
@@ -47,13 +22,18 @@ final List<EventCard> events = [
     ],
     ticketsPrice: 50,
   )),
-  EventCard(
+  NewEventCard(
       event: Event(
     artistsNames: ['artist one', 'artist two', 'artist three'],
     availablePlaces: 80,
-    beginDate: 'sometime',
+    beginDate: Date(
+        dayName: 'sunday',
+        dayNumber: '9',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
     description: 'very good',
-    eventName: 'Event four',
+    eventName: 'Event one',
     imagesNames: [
       'assets/images/concert.png',
       'assets/images/medium page background image.jpg',
@@ -61,13 +41,18 @@ final List<EventCard> events = [
     ],
     ticketsPrice: 50,
   )),
-  EventCard(
+  NewEventCard(
       event: Event(
     artistsNames: ['artist one', 'artist two', 'artist three'],
     availablePlaces: 80,
-    beginDate: 'sometime',
+    beginDate: Date(
+        dayName: 'sunday',
+        dayNumber: '9',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
     description: 'very good',
-    eventName: 'Event five',
+    eventName: 'Event one',
     imagesNames: [
       'assets/images/concert.png',
       'assets/images/medium page background image.jpg',
@@ -75,13 +60,151 @@ final List<EventCard> events = [
     ],
     ticketsPrice: 50,
   )),
-  EventCard(
+  NewEventCard(
       event: Event(
     artistsNames: ['artist one', 'artist two', 'artist three'],
     availablePlaces: 80,
-    beginDate: 'sometime',
+    beginDate: Date(
+        dayName: 'sunday',
+        dayNumber: '9',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
     description: 'very good',
-    eventName: 'Event six',
+    eventName: 'Event one',
+    imagesNames: [
+      'assets/images/concert.png',
+      'assets/images/medium page background image.jpg',
+      'assets/images/tickets.png'
+    ],
+    ticketsPrice: 50,
+  )),
+  NewEventCard(
+      event: Event(
+    artistsNames: ['artist one', 'artist two', 'artist three'],
+    availablePlaces: 80,
+    beginDate: Date(
+        dayName: 'sunday',
+        dayNumber: '9',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
+    description: 'very good',
+    eventName: 'Event one',
+    imagesNames: [
+      'assets/images/concert.png',
+      'assets/images/medium page background image.jpg',
+      'assets/images/tickets.png'
+    ],
+    ticketsPrice: 50,
+  )),
+  NewEventCard(
+      event: Event(
+    artistsNames: ['artist one', 'artist two', 'artist three'],
+    availablePlaces: 80,
+    beginDate: Date(
+        dayName: 'sunday',
+        dayNumber: '9',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
+    description: 'very good',
+    eventName: 'Event one',
+    imagesNames: [
+      'assets/images/concert.png',
+      'assets/images/medium page background image.jpg',
+      'assets/images/tickets.png'
+    ],
+    ticketsPrice: 50,
+  )),
+  NewEventCard(
+      event: Event(
+    artistsNames: ['artist one', 'artist two', 'artist three'],
+    availablePlaces: 80,
+    beginDate: Date(
+        dayName: 'someday',
+        dayNumber: '33',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
+    description: 'very good',
+    eventName: 'Event one',
+    imagesNames: [
+      'assets/images/medium page background image.jpg',
+      'assets/images/concert.png',
+      'assets/images/tickets.png'
+    ],
+    ticketsPrice: 50,
+  )),
+  NewEventCard(
+      event: Event(
+    artistsNames: ['artist one', 'artist two', 'artist three'],
+    availablePlaces: 80,
+    beginDate: Date(
+        dayName: 'someday',
+        dayNumber: '33',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
+    description: 'very good',
+    eventName: 'Event one',
+    imagesNames: [
+      'assets/images/medium page background image.jpg',
+      'assets/images/concert.png',
+      'assets/images/tickets.png'
+    ],
+    ticketsPrice: 50,
+  )),
+  NewEventCard(
+      event: Event(
+    artistsNames: ['artist one', 'artist two', 'artist three'],
+    availablePlaces: 80,
+    beginDate: Date(
+        dayName: 'someday',
+        dayNumber: '33',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
+    description: 'very good',
+    eventName: 'Event one',
+    imagesNames: [
+      'assets/images/medium page background image.jpg',
+      'assets/images/concert.png',
+      'assets/images/tickets.png'
+    ],
+    ticketsPrice: 50,
+  )),
+  NewEventCard(
+      event: Event(
+    artistsNames: ['artist one', 'artist two', 'artist three'],
+    availablePlaces: 80,
+    beginDate: Date(
+        dayName: 'someday',
+        dayNumber: '33',
+        month: 'july',
+        time: '6:30',
+        year: '2203'),
+    description: 'very good',
+    eventName: 'Event one',
+    imagesNames: [
+      'assets/images/medium page background image.jpg',
+      'assets/images/concert.png',
+      'assets/images/tickets.png'
+    ],
+    ticketsPrice: 50,
+  )),
+  NewEventCard(
+      event: Event(
+    artistsNames: ['artist one', 'artist two', 'artist three'],
+    availablePlaces: 80,
+    beginDate: Date(
+        dayName: 'monday',
+        dayNumber: '10',
+        month: 'july',
+        time: '6:30',
+        year: '2023'),
+    description: 'very good',
+    eventName: 'Event one',
     imagesNames: [
       'assets/images/concert.png',
       'assets/images/medium page background image.jpg',

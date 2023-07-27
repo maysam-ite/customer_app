@@ -82,7 +82,7 @@ class Sizes {
     cardButtonTextSize = width * .1;
     normalButtonInsidePaddin = width * .08;
     bigButtonTextSize = height * .04;
-    normalButtonTextSize = height * .027;
+    normalButtonTextSize = height * .02;
     textFieldTextSize = height * .04;
     textFieldWidth = width * .8;
     appBarIconSize = width * .07;
@@ -98,8 +98,8 @@ class Sizes {
     eventCardHeight = height * .45;
     floatButtonWidth = width * .08;
     floatButtonHeight = height * .06;
-    normalButtonHeight = height * .06;
-    normalButtonWidht = width * .5;
+    normalButtonHeight = height * .06 / 1.4;
+    normalButtonWidht = width * .5 / 1.3;
     bigButtonHeight = height * .2;
     bigButtonWidht = width * .3;
   }

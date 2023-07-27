@@ -6,6 +6,7 @@ import '../../constant/sizes.dart';
 import '../../constant/theme.dart';
 import '../../main.dart';
 import 'general_text_style.dart';
+import 'new_event_card.dart';
 
 class EventCard extends StatelessWidget {
   final EventCardController controller = Get.put(EventCardController());
@@ -88,7 +89,7 @@ class EventCard extends StatelessWidget {
             ),
             const SizedBox(height: 3),
             setEventINfo(
-              'Date: '.tr + event.beginDate,
+              '${'Date: '.tr}${event.beginDate.dayNumber}/${event.beginDate.month}/${event.beginDate.year}',
             ),
             const SizedBox(height: 3),
             setEventINfo(
@@ -194,25 +195,25 @@ class EventCard extends StatelessWidget {
   }
 }
 
-class Event {
-  final List<String> imagesNames;
-  final String eventName;
-  final List<String> artistsNames;
-  final String description;
-  final double ticketsPrice;
-  final int availablePlaces;
-  final String beginDate;
+// class Event {
+//   final List<String> imagesNames;
+//   final String eventName;
+//   final List<String> artistsNames;
+//   final String description;
+//   final double ticketsPrice;
+//   final int availablePlaces;
+//   final String beginDate;
 
-  Event({
-    required this.imagesNames,
-    required this.eventName,
-    required this.artistsNames,
-    required this.description,
-    required this.ticketsPrice,
-    required this.availablePlaces,
-    required this.beginDate,
-  });
-}
+//   Event({
+//     required this.imagesNames,
+//     required this.eventName,
+//     required this.artistsNames,
+//     required this.description,
+//     required this.ticketsPrice,
+//     required this.availablePlaces,
+//     required this.beginDate,
+//   });
+// }
 
 class EventCardController extends GetxController {
   final RxInt pageIndex = 0.obs;
