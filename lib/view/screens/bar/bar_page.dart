@@ -19,68 +19,69 @@ class BarPage extends StatelessWidget  {
   Widget build(BuildContext context) {
     Sizes size = Sizes(context);
     BarPageController controller = Get.find();
-    return DefaultTabController(
-        length: 1,
-        initialIndex: 0,
-        child: Scaffold(
-          floatingActionButton: Obx(() => SizedBox(
-                height: 100,
-                child: AnimatedAlign(
-                  duration: const Duration(milliseconds: 500),
-                  alignment: controller.page.value == 2
-                      ? sharedPreferences!.getString('lang') == 'en'
-                          ? Alignment.topRight
-                          : sharedPreferences!.getString('lang') == 'ar'
-                              ? Alignment.topLeft
-                              : Alignment.topRight
-                      : sharedPreferences!.getString('lang') == 'en'
-                          ? Alignment.bottomRight
-                          : sharedPreferences!.getString('lang') == 'ar'
-                              ? Alignment.bottomLeft
-                              : Alignment.bottomRight,
-                  child: FloatingActionButton.extended(
-                      onPressed: () {},
-                      label: Text('Done'.tr, style: generalTextStyle(null))),
-                ),
-              )),
-          extendBody: true,
-          appBar: createAppBar(size, controller.page,controller),
-          drawer: ProjectDrawer(),
-          body: SafeArea(
-            child: Stack(
-              children: [
-                Container(
-                  color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 30),
-                  decoration: BoxDecoration(
-                    color:
-                        Get.isDarkMode ? backGroundDarkColor : skinColorWhite,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                  ),
-                ),
-                Obx(() {
-                  print('selectPage(controller)');
-                  print(selectPage(controller));
-                  return TabBarView(
-                    children: selectPage(controller),
-                  );
-                }),
-              ],
+    return Scaffold(
+
+      floatingActionButton: Obx(() => SizedBox(
+            height: 100,
+            child: AnimatedAlign(
+              duration: const Duration(milliseconds: 500),
+              alignment: controller.page.value == 2
+                  ? sharedPreferences!.getString('lang') == 'en'
+                      ? Alignment.topRight
+                      : sharedPreferences!.getString('lang') == 'ar'
+                          ? Alignment.topLeft
+                          : Alignment.topRight
+                  : sharedPreferences!.getString('lang') == 'en'
+                      ? Alignment.bottomRight
+                      : sharedPreferences!.getString('lang') == 'ar'
+                          ? Alignment.bottomLeft
+                          : Alignment.bottomRight,
+              child: FloatingActionButton.extended(
+                  onPressed: () {},
+                  label: Text('Done'.tr, style: generalTextStyle(null))),
             ),
-          ),
-          bottomNavigationBar: const BottomNavBar(),
-        ));
+          )),
+      extendBody: true,
+      appBar: createAppBar(size, controller.page,controller),
+      drawer: ProjectDrawer(),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+              color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 30),
+              decoration: BoxDecoration(
+                color:
+                    Get.isDarkMode ? backGroundDarkColor : skinColorWhite,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+              ),
+            ),
+            Obx(() {
+              print('selectPage(controller)');
+              print(selectPage(controller));
+              return Positioned.fill(
+                child: TabBarView(
+                  controller: controller.tabControllerBottomNavBar,
+                  children: selectPage(controller),
+                ),
+              );
+            }),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const BottomNavBar(),
+    );
   }
 
   List<Widget> selectPage(BarPageController controller) {
     List<Widget> list = [
       buildEventGridView(),
-      places(),
+      places(controller),
       buildBarGridView(Colors.blue),
     ];
     return ([list[controller.page.value]]);
@@ -110,7 +111,7 @@ class BarPage extends StatelessWidget  {
           1.5), //there is a problem here that I can't rebuild the size of the appbar.
       child: Obx(() => AppBar(
             bottom: pageNumber.value == 1
-                ? TabBar(controller: controller.tabController, tabs: [
+                ? TabBar(controller: controller.tabControllerAppbarBottom, tabs: [
                     Tab(
                       text: 'Section one'.tr,
                     ),

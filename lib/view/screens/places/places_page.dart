@@ -4,68 +4,72 @@ import 'package:get/get.dart';
 
 import '../../../main.dart';
 import '../../widget/table_number_container.dart';
+import '../bar/bar_page_controller.dart';
 
-Widget places() {
+Widget places(BarPageController controller) {
   return TabBarView(
+    controller: controller.tabControllerAppbarBottom,
     children: [
-      Expanded(
-        child: Column(
-          children: [
-            firstPlacesBody(),
-          ],
-        ),
+      Column(
+        children: [
+          Expanded(child: firstPlacesBody()),
+        ],
       ),
-      Expanded(
-        child: Column(
-          children: [secondPlacesBody()],
-        ),
+      Column(
+        children: [Expanded(child: secondPlacesBody())],
       ),
     ],
   );
 }
 
 Widget firstPlacesBody() {
-  return SizedBox(
-    height: Get.size.height * .65,
-    width: Get.size.width * .98,
-    child: Stack(
-      children: [
-        table(10, null, Get.size.width * .5 - 90, null, [1, 2, 3], true),
-        table(Get.size.height * .5 / 2 - 90, null, 10, null, [4, 5, 6], false),
-        table(Get.size.height * .5 / 2 - 90, null, null, 10, [7, 8, 9], false),
-        singlePart(null, Get.size.height * .6 / 2 - 90, 10, null, 10),
-        singlePart(null, Get.size.height * .6 / 2 - 90, null, 10, 11),
-        singlePart(null, Get.size.height * .6 - 60, 10, null, 12),
-        middelTable([13, 14, 15, 16]),
-      ],
+  return Padding(
+    padding: const EdgeInsets.only(bottom:90),
+    child: SizedBox(
+      height: Get.size.height * .65,
+      width: Get.size.width * .98,
+      child: Stack(
+        children: [
+          table(10, null, Get.size.width * .5 - 90, null, [1, 2, 3], true),
+          table(Get.size.height * .5 / 2 - 90, null, 10, null, [4, 5, 6], false),
+          table(Get.size.height * .5 / 2 - 90, null, null, 10, [7, 8, 9], false),
+          singlePart(null, Get.size.height * .6 / 2 - 90, 10, null, 10),
+          singlePart(null, Get.size.height * .6 / 2 - 90, null, 10, 11),
+          singlePart(null, Get.size.height * .6 - 60, 10, null, 12),
+          middelTable([13, 14, 15, 16]),
+        ],
+      ),
     ),
   );
 }
 
 Widget secondPlacesBody() {
-  return SizedBox(
-    height: Get.size.height * .65,
-    width: Get.size.width * .98,
-    child: Stack(
-      children: [
-        table(Get.size.height * .5 / 2 - 30, null, 100, null, [1, 2, 3], false),
-        table(Get.size.height * .5 / 2 - 30, null, 10, null, [4, 5, 6], false),
-        table(Get.size.height * .5 / 2 - 30, null, 190, null, [7, 8, 9], false),
-        singlePart(null, Get.size.height * .6 / 2 - 90, 10, null,
-            10), //this one should be in the top wall
-        singlePart(null, Get.size.height * .6 / 2 - 90, null, 10,
-            11), //this one should be in the top wall
-        singlePart(null, Get.size.height * .6 - 60, 10, null,
-            12), //this one should be in the top wall
-        singlePart(null, Get.size.height * .6 - 60, 10, null,
-            12), //this one should be in the bottom wall
-        singlePart(null, Get.size.height * .6 - 60, 10, null,
-            12), //this one should be in the bottom wall
-        singlePart(null, Get.size.height * .6 - 60, 10, null,
-            12), //this one should be in the start wall in the left
-        singlePart(null, Get.size.height * .6 - 60, 10, null,
-            12), //this one should be in the start wall in the right
-      ],
+  return Padding(
+    padding: const EdgeInsets.only(bottom:30),
+    child: SizedBox(
+      height: Get.size.height * .65,
+      width: Get.size.width * .98,
+      child: Stack(
+        children: [
+          table(Get.size.height * .5 / 2 - 30, null, 100, null, [1, 2, 3], false),
+          table(Get.size.height * .5 / 2 - 30, null, 10, null, [4, 5, 6], false),
+          table(Get.size.height * .5 / 2 - 30, null, 190, null, [7, 8, 9], false),
+          singlePart(null, Get.size.height * .6 / 2 - 90, 10, null,
+              10), //this one should be in the top wall
+          singlePart(null, Get.size.height * .6 / 2 - 90, null, 10,
+              11), //this one should be in the top wall
+          singlePart(null, Get.size.height * .6 - 60, 10, null,
+              12), //this one should be in the top wall
+          singlePart(null, Get.size.height * .6 - 60, 10, null,
+              12), //this one should be in the bottom wall
+          singlePart(null, Get.size.height * .6 - 60, 10, null,
+              12), //this one should be in the bottom wall
+          singlePart(null, Get.size.height * .6 - 60, 10, null,
+              12), //this one should be in the start wall in the left
+          singlePart(null, Get.size.height * .6 - 60, 10, null,
+              12), //this one should be in the start wall in the right
+        ],
+      ),
     ),
   );
 }
