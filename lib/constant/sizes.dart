@@ -65,7 +65,7 @@ class Sizes {
     if (getDeviceType.getDevicetype(context) == 'computer') {
       setSizesForComputer();
     } else if (getDeviceType.getDevicetype(context) == 'tablet') {
-      setSizesForTablet();
+      setSizesForMobile();
     } else if (getDeviceType.getDevicetype(context) == 'SmartPhone') {
       setSizesForMobile();
     }
@@ -98,7 +98,7 @@ class Sizes {
     eventCardHeight = height * .45;
     floatButtonWidth = width * .08;
     floatButtonHeight = height * .06;
-    normalButtonHeight = height * .06 / 1.4;
+    normalButtonHeight = 35; //height * .06 / 1.1;
     normalButtonWidht = width * .5 / 1.3;
     bigButtonHeight = height * .2;
     bigButtonWidht = width * .3;

@@ -3,8 +3,7 @@ import 'package:customer_app/view/widget/general_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
- Color? tablesColor = Get.isDarkMode ? skinColorWhite : backGroundDarkColor;
+Color? tablesColor = Get.isDarkMode ? backGroundDarkColor : skinColorWhite;
 //for light mode
 Color primaryColor =
     Colors.teal[300]!; //const Color.fromARGB(1, 43, 120, 97); //done

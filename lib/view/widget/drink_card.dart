@@ -14,9 +14,8 @@ class DrinkCard extends StatelessWidget {
   DrinkCard({super.key, required this.drink, this.onPressed});
   @override
   Widget build(BuildContext context) {
-    DrinkCardContrller controller = Get.put(
-      DrinkCardContrller(),
-      tag: drink.hashCode.toString(),
+    DrinkCardController controller = Get.put(
+      DrinkCardController(),
     );
     Sizes size = Sizes(context);
     return GestureDetector(
@@ -29,7 +28,7 @@ class DrinkCard extends StatelessWidget {
                 ? darkWoodBrownColor.withOpacity(0.9)
                 : woodBrownColor.withOpacity(0.9),
             borderRadius: BorderRadius.circular(size.buttonRadius)),
-        width: size.drinkCardWidth,
+        width: 100, //size.drinkCardWidth,
         height: 210,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +63,8 @@ class DrinkCard extends StatelessWidget {
                           addRemoveButton('add', controller),
                           const Spacer(),
                           Obx(() => Text(
-                                controller.numberOfDrinks.value.toString(),
+                                controller.numberOfDrinks[drink.id].value
+                                    .toString(),
                                 style: TextStyle(
                                   color: skinColorWhite,
                                 ),
@@ -96,14 +96,15 @@ class DrinkCard extends StatelessWidget {
     );
   }
 
-  Widget addRemoveButton(String addOrRemove, DrinkCardContrller controller) {
+  Widget addRemoveButton(
+      String addOrRemove, DrinkCardController drinkCardController) {
     return SizedBox(
       width: 60,
       child: MaterialButton(
         onPressed: () {
           addOrRemove == 'add'
-              ? controller.increaseTheNumberOfDrinks()
-              : controller.decreaseTheNumberOfDrinks();
+              ? drinkCardController.increaseTheNumberOfDrinks(drink.id)
+              : drinkCardController.decreaseTheNumberOfDrinks(drink.id);
           //add one from this drink or remove one of the drink
         },
         child: Icon(
@@ -117,21 +118,27 @@ class DrinkCard extends StatelessWidget {
 }
 
 class Drink {
+  int id;
   String name;
   int unitPriceInSP;
   Drink({
+    required this.id,
     required this.name,
     required this.unitPriceInSP,
   });
 }
 
-class DrinkCardContrller extends GetxController {
-  RxInt numberOfDrinks = 0.obs;
-  void increaseTheNumberOfDrinks() {
-    numberOfDrinks.value++;
+class DrinkCardController extends GetxController {
+  List<RxInt> numberOfDrinks = <RxInt>[].obs;
+  void addNewElement() {
+    numberOfDrinks.add(0.obs);
   }
 
-  void decreaseTheNumberOfDrinks() {
-    numberOfDrinks > 0 ? numberOfDrinks.value-- : null;
+  void increaseTheNumberOfDrinks(int id) {
+    numberOfDrinks[id].value++;
+  }
+
+  void decreaseTheNumberOfDrinks(int id) {
+    numberOfDrinks[id] > 0 ? numberOfDrinks[id].value-- : null;
   }
 }

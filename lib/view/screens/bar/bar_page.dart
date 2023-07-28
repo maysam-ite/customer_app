@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:sized_context/sized_context.dart';
 import '../../../constant/sizes.dart';
 import '../../../constant/theme.dart';
 import '../../../main.dart';
@@ -13,14 +13,14 @@ import '../events_page/event_page.dart';
 import '../places/places_page.dart';
 import 'bar_page_controller.dart';
 
-class BarPage extends StatelessWidget  {
-   BarPage({Key? key}) : super(key: key);
+class BarPage extends StatelessWidget {
+  final DrinkCardController drinkCardContrller = Get.put(DrinkCardController());
+  BarPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Sizes size = Sizes(context);
     BarPageController controller = Get.find();
     return Scaffold(
-
       floatingActionButton: Obx(() => SizedBox(
             height: 100,
             child: AnimatedAlign(
@@ -42,7 +42,7 @@ class BarPage extends StatelessWidget  {
             ),
           )),
       extendBody: true,
-      appBar: createAppBar(size, controller.page,controller),
+      appBar: createAppBar(size, controller.page, controller),
       drawer: ProjectDrawer(),
       body: SafeArea(
         child: Stack(
@@ -53,8 +53,7 @@ class BarPage extends StatelessWidget  {
             Container(
               margin: const EdgeInsets.only(top: 30),
               decoration: BoxDecoration(
-                color:
-                    Get.isDarkMode ? backGroundDarkColor : skinColorWhite,
+                color: Get.isDarkMode ? backGroundDarkColor : skinColorWhite,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
@@ -62,12 +61,10 @@ class BarPage extends StatelessWidget  {
               ),
             ),
             Obx(() {
-              print('selectPage(controller)');
-              print(selectPage(controller));
               return Positioned.fill(
                 child: TabBarView(
                   controller: controller.tabControllerBottomNavBar,
-                  children: selectPage(controller),
+                  children: selectPage(controller, context, drinkCardContrller),
                 ),
               );
             }),
@@ -78,45 +75,57 @@ class BarPage extends StatelessWidget  {
     );
   }
 
-  List<Widget> selectPage(BarPageController controller) {
+  List<Widget> selectPage(BarPageController controller, BuildContext context,
+      DrinkCardController drinkCardContrller) {
     List<Widget> list = [
       buildEventGridView(),
       places(controller),
-      buildBarGridView(Colors.blue),
+      buildBarGridView(Colors.blue, context, drinkCardContrller),
     ];
     return ([list[controller.page.value]]);
   }
 
-  Widget buildBarGridView(Color? color) {
+  Widget buildBarGridView(Color? color, BuildContext context,
+      DrinkCardController drinkCardContrller) {
     return GridView.builder(
       padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: context.widthInches > 8.5
+            ? 4
+            : context.widthInches > 5.5
+                ? 3
+                : 2,
         mainAxisExtent: 230,
         crossAxisSpacing: 10,
         mainAxisSpacing: 16,
       ),
       itemCount: 16,
       itemBuilder: (context, index) {
+        drinkCardContrller.addNewElement();
         return DrinkCard(
-          drink: Drink(name: 'beer', unitPriceInSP: 15000),
+          drink: Drink(id: index, name: 'beer', unitPriceInSP: 15000),
         );
       },
     );
   }
 
-  PreferredSizeWidget? createAppBar(Sizes size, RxInt pageNumber,BarPageController controller) {
+  PreferredSizeWidget? createAppBar(
+      Sizes size, RxInt pageNumber, BarPageController controller) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(kToolbarHeight *
           1.5), //there is a problem here that I can't rebuild the size of the appbar.
       child: Obx(() => AppBar(
             bottom: pageNumber.value == 1
-                ? TabBar(controller: controller.tabControllerAppbarBottom, tabs: [
-                    Tab(
-                      text: 'Section one'.tr,
-                    ),
-                    Tab(text: 'Section two'.tr),
-                  ])
+                ? TabBar(
+                    indicatorColor:
+                        Get.isDarkMode ? primaryColor : darkPrimaryColor,
+                    controller: controller.tabControllerAppbarBottom,
+                    tabs: [
+                        Tab(
+                          text: 'Section one'.tr,
+                        ),
+                        Tab(text: 'Section two'.tr),
+                      ])
                 : null,
             elevation: 0.4,
             backgroundColor: Get.isDarkMode ? darkPrimaryColor : primaryColor,

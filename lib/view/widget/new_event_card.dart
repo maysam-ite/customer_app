@@ -16,7 +16,7 @@ class NewEventCard extends StatelessWidget {
         Get.toNamed('/EventInfo', arguments: event);
       },
       child: Container(
-          height: Get.size.height * .12,
+          height: 85, //Get.size.height * .12,
           width: Get.size.width * .95,
           decoration: BoxDecoration(
               border: Border.all(
@@ -61,7 +61,7 @@ class NewEventCard extends StatelessWidget {
 
   Widget dateBox() {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(6.0),
       child: dateContainer(event.beginDate.month.toUpperCase(),
           event.beginDate.dayNumber, event.beginDate.dayName.toUpperCase()),
     );
@@ -70,7 +70,13 @@ class NewEventCard extends StatelessWidget {
   Widget eventImage() {
     return Padding(
       padding: const EdgeInsets.only(left: 15.6, top: 6, right: 6, bottom: 6),
-      child: SizedBox(
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(900),
+            border: Border.all(
+              color: Colors.black54,
+              width: 0.2,
+            )),
         width: 100,
         height: 100,
         child: ClipRRect(
@@ -87,7 +93,7 @@ class NewEventCard extends StatelessWidget {
   Widget timeContainer(String time) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      height: Get.size.height * .04,
+      height: 28.3, //Get.size.height * .04,
       width: Get.size.width * .22,
       decoration: BoxDecoration(
           border: Border.all(
@@ -105,36 +111,38 @@ class NewEventCard extends StatelessWidget {
   }
 
   Widget dateContainer(String monthName, String dayNumber, String dayName) {
-    return Center(
-      child: Container(
-        height: Get.size.height * .11,
-        width: Get.size.height * .11,
-        decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 184, 212, 210),
+    return Container(
+      height: 78, //Get.size.height * .11,
+      width: 78, //Get.size.height * .11,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black54,
+          width: 0.2,
         ),
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            // const Spacer(),
-            Text(
+        color: const Color.fromARGB(255, 184, 212, 210),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Text(
               monthName,
               style:
                   TextStyle(color: Colors.black26, fontFamily: jostFontFamily),
             ),
-            const SizedBox(
-              height: 1,
-            ),
-            Text(dayNumber,
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(dayNumber,
                 style: TextStyle(fontSize: 31, fontFamily: jostFontFamily)),
-            const SizedBox(
-              height: 0,
-            ),
-            Text(dayName,
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(dayName,
                 style: TextStyle(
                     color: Colors.black26, fontFamily: jostFontFamily)),
-            // const Spacer(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
