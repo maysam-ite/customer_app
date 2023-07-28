@@ -13,9 +13,8 @@ import '../events_page/event_page.dart';
 import '../places/places_page.dart';
 import 'bar_page_controller.dart';
 
-class BarPage extends StatelessWidget {
-  BarPage({Key? key}) : super(key: key);
-
+class BarPage extends StatelessWidget  {
+   BarPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Sizes size = Sizes(context);
@@ -45,7 +44,7 @@ class BarPage extends StatelessWidget {
                 ),
               )),
           extendBody: true,
-          appBar: createAppBar(size, controller.page),
+          appBar: createAppBar(size, controller.page,controller),
           drawer: ProjectDrawer(),
           body: SafeArea(
             child: Stack(
@@ -105,14 +104,13 @@ class BarPage extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget? createAppBar(Sizes size, RxInt pageNumber) {
+  PreferredSizeWidget? createAppBar(Sizes size, RxInt pageNumber,BarPageController controller) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(pageNumber.value == 1
-          ? kToolbarHeight * 2
-          : kToolbarHeight), //there is a problem here that I can't rebuild the size of the appbar.
+      preferredSize: const Size.fromHeight(kToolbarHeight *
+          1.5), //there is a problem here that I can't rebuild the size of the appbar.
       child: Obx(() => AppBar(
             bottom: pageNumber.value == 1
-                ? TabBar(tabs: [
+                ? TabBar(controller: controller.tabController, tabs: [
                     Tab(
                       text: 'Section one'.tr,
                     ),
