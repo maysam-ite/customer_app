@@ -10,7 +10,7 @@ import '../../widget/drawer.dart';
 import '../../widget/drink_card.dart';
 import '../../widget/general_text_style.dart';
 import '../events_page/event_page.dart';
-import '../places/first_places_page.dart';
+import '../places/places_page.dart';
 import 'bar_page_controller.dart';
 
 class BarPage extends StatelessWidget {
