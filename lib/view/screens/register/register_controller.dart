@@ -1,6 +1,5 @@
 import 'package:customer_app/constant/status_request.dart';
 import 'package:customer_app/general_controllers/statuse_request_controller.dart';
-import 'package:customer_app/main.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

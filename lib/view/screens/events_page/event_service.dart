@@ -1,30 +1,27 @@
-// ignore_for_file: avoid_print
 import 'dart:convert';
-import 'package:customer_app/constant/status_request.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:dartz/dartz.dart';
-
 import '../../../constant/server_const.dart';
+import '../../../constant/status_request.dart';
 import '../../../data/checkInternet/check_internet.dart';
+import 'package:http/http.dart' as http;
 
-class LoginService {
-  Future<Either<StatuseRequest, Map>> login(Map<String, String> data) async {
+class EventService {
+  Future<Either<StatuseRequest, Map>> getEvents(String token) async {
     //Either for return two data type in the same time
     try {
       if (await checkInternet()) {
-        Uri url = Uri.parse(ServerConstApis.signIn);
-        http.Response response = await http.post(
-          url,
-          body: data,
-          headers: {"Access-Control-Allow-Origin": "*"},
-        );
-        print("/////////////////////////////////////");
-        print(response.body);
+        Uri url = Uri.parse(ServerConstApis.showUpComing);
+        Map<String, String> headers = {
+          "Access-Control-Allow-Origin": "*",
+          "x-access-token": token
+        };
+        var response = await http.get(url, headers: headers);
+       
         if (response.statusCode == 200 || response.statusCode == 201) {
           final responsebody = jsonDecode(response.body);
+
           return Right(responsebody);
-        } else if (response.statusCode == 400) {
-          return const Left(StatuseRequest.validationfailuer);
         } else if (response.statusCode == 401) {
           return const Left(StatuseRequest.authfailuer);
         } else {
@@ -35,8 +32,7 @@ class LoginService {
             .offlinefailure); //left return the left data type =>StatuseRequest
       }
     } catch (e) {
-      print(e);
-      return const Left(StatuseRequest.serverfailure);
+      return const Left(StatuseRequest.offlinefailure);
     }
   }
 }

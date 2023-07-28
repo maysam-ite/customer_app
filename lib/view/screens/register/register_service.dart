@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:dartz/dartz.dart';
 
 import '../../../constant/server_const.dart';
-import '../../../data/Models/login_model.dart';
 import '../../../data/checkInternet/check_internet.dart';
 
 class RegisterService {

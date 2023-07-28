@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/theme.dart';
-import '../../../data/Models/login_model.dart';
 import 'login_service.dart';
 
 class LoginController extends GetxController
