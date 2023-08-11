@@ -75,8 +75,8 @@ class Landing extends StatelessWidget {
                     myheight: size.normalButtonHeight,
                     mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
                     ontap: () {
-                      Get.offAllNamed('/Bar');
-                    },
+                      controller.onPress();
+                       },
                     child: Text(
                       'Continue'.tr,
                       style: TextStyle(
