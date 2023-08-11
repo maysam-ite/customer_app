@@ -24,6 +24,7 @@ class EventController extends GetxController
   }
 
   Future<List<EventModel>> sendingARequestAndHandlingData() async {
+    print("drrrrrrrrrrrrrrr");
     statuseRequest = StatuseRequest.loading;
     update();
     dynamic response =

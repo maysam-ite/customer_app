@@ -152,6 +152,7 @@ class Sizes {
     smallEventCardWidth = 220;
     print('set size for tablet');
     appBarTextFieldWidth = 50;
+    moveBetweenLoginandregisterText=15;
     wideNormalButtonWidth = context.widthInches > 5 ? 300 : width * .85;
     wideNormalButtonTextSize = 20;
     cardButtonTextSize = width < height

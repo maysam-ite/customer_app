@@ -11,13 +11,15 @@ class EventService {
     //Either for return two data type in the same time
     try {
       if (await checkInternet()) {
+      print("start");
         Uri url = Uri.parse(ServerConstApis.showUpComing);
         Map<String, String> headers = {
           "Access-Control-Allow-Origin": "*",
           "x-access-token": token
         };
+        print("fffffffffffff");
         var response = await http.get(url, headers: headers);
-       
+       print(response.body);
         if (response.statusCode == 200 || response.statusCode == 201) {
           final responsebody = jsonDecode(response.body);
 
@@ -32,6 +34,7 @@ class EventService {
             .offlinefailure); //left return the left data type =>StatuseRequest
       }
     } catch (e) {
+      
       return const Left(StatuseRequest.offlinefailure);
     }
   }

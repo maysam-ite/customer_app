@@ -1,5 +1,5 @@
 class ServerConstApis {
-  static String baseAPI = 'http://192.168.1.102:3000/';
+  static String baseAPI = 'http://127.0.0.1:3000/';
 
 ///// sign 
 static String signUp='${baseAPI}customers/signup';
