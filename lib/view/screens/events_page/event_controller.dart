@@ -61,12 +61,14 @@ class EventController extends GetxController
   }
 
   Future<List<EventModel>> whenGetDataSuccess(response) async {
-    List responsedata = response['data'];
+    List responsedata = response['data']['upComing'];
+    print("befor handling");
     for (int i = 0; i < responsedata.length; i++) {
+      print(i);
       finalListData.add(EventModel.fromMap(responsedata[i]));
     }
 
-
+print(finalListData.length);
     update();
     return finalListData;
   }

@@ -14,10 +14,10 @@ class EventService {
       print("start");
         Uri url = Uri.parse(ServerConstApis.showUpComing);
         Map<String, String> headers = {
-          "Access-Control-Allow-Origin": "*",
+          // "Access-Control-Allow-Origin": "*",
           "x-access-token": token
         };
-        print("fffffffffffff");
+       
         var response = await http.get(url, headers: headers);
        print(response.body);
         if (response.statusCode == 200 || response.statusCode == 201) {
