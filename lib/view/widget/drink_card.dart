@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:customer_app/view/screens/cart/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -103,7 +104,7 @@ class DrinkCard extends StatelessWidget {
       child: MaterialButton(
         onPressed: () {
           addOrRemove == 'add'
-              ? drinkCardController.increaseTheNumberOfDrinks(drink.id)
+              ? drinkCardController.increaseTheNumberOfDrinks(drink.id, drink)
               : drinkCardController.decreaseTheNumberOfDrinks(drink.id);
           //add one from this drink or remove one of the drink
         },
@@ -118,11 +119,13 @@ class DrinkCard extends StatelessWidget {
 }
 
 class Drink {
+  // String imageName;
   int id;
   String name;
   int unitPriceInSP;
   Drink({
     required this.id,
+    // required this.imageName,
     required this.name,
     required this.unitPriceInSP,
   });
@@ -130,15 +133,41 @@ class Drink {
 
 class DrinkCardController extends GetxController {
   List<RxInt> numberOfDrinks = <RxInt>[].obs;
-  void addNewElement() {
-    numberOfDrinks.add(0.obs);
+  Order order = Order();
+  void increaseTheNumberOfDrinks(int id, Drink drink) {
+    numberOfDrinks[id].value++;
+    if (ifAddForTheFirstTime(drink)) {
+      order.drinksWithAmount.add(DrinkAmount(drink: drink, amount: 1));
+    } else {
+      for (var element in order.drinksWithAmount) {
+        if (element.drink == drink) {
+          element.amount++;
+        }
+      }
+    }
   }
 
-  void increaseTheNumberOfDrinks(int id) {
-    numberOfDrinks[id].value++;
+  bool ifAddForTheFirstTime(Drink drink) {
+    for (var element in order.drinksWithAmount) {
+      if (element.drink.name == drink.name) {
+        return false;
+      }
+    }
+    return true;
   }
 
   void decreaseTheNumberOfDrinks(int id) {
+    order.drinksWithAmount[id].amount--;
     numberOfDrinks[id] > 0 ? numberOfDrinks[id].value-- : null;
+  }
+
+  void makeTheNumberofDriknsEqualsZero() {
+    for (var element in numberOfDrinks) {
+      element.value = 0;
+    }
+  }
+
+  void addNewElement() {
+    numberOfDrinks.add(0.obs);
   }
 }

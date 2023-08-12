@@ -27,7 +27,7 @@ class BottomNavBarState extends State<BottomNavBar> {
       index: 0,
       height: 75,
       items: <Widget>[
-        bottomBarUnit('Events', Icons.event),
+        bottomBarUnit('Events'.tr, Icons.event),
         bottomBarUnit('Place', Icons.event_seat_rounded),
         bottomBarUnit('Bar', Icons.wine_bar_rounded),
       ],

@@ -85,7 +85,7 @@ class Sizes {
     normalButtonTextSize = height * .02;
     textFieldTextSize = height * .04;
     textFieldWidth = width * .8;
-    appBarIconSize = width * .07;
+    appBarIconSize = 30;
     appBarTextSize = width * .1;
     drinkCardWidth = width * .4;
     drinkCardHeight = height * .4;

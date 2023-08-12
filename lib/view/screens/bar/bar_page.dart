@@ -37,7 +37,9 @@ class BarPage extends StatelessWidget {
                           ? Alignment.bottomLeft
                           : Alignment.bottomRight,
               child: FloatingActionButton.extended(
-                  onPressed: () {},
+                  onPressed: () {
+                    onpressedDone(controller.page.value, drinkCardContrller);
+                  },
                   label: Text('Done'.tr, style: generalTextStyle(null))),
             ),
           )),
@@ -103,7 +105,7 @@ class BarPage extends StatelessWidget {
       itemBuilder: (context, index) {
         drinkCardContrller.addNewElement();
         return DrinkCard(
-          drink: Drink(id: index, name: 'beer', unitPriceInSP: 15000),
+          drink: Drink(id: index, name: 'beer+$index', unitPriceInSP: 15000),
         );
       },
     );
@@ -115,6 +117,8 @@ class BarPage extends StatelessWidget {
       preferredSize: const Size.fromHeight(kToolbarHeight *
           1.5), //there is a problem here that I can't rebuild the size of the appbar.
       child: Obx(() => AppBar(
+            iconTheme: IconThemeData(
+                color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
             bottom: pageNumber.value == 1
                 ? TabBar(
                     indicatorColor:
@@ -144,5 +148,17 @@ class BarPage extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  void onpressedDone(int index, DrinkCardController drinkCardController) {
+    index == 2
+        ? {
+            Get.toNamed('/Cart', arguments: drinkCardController.order),
+            Future.delayed(const Duration(milliseconds: 80), () {
+              drinkCardController.order.makeTheOrderEmpty();
+              drinkCardContrller.makeTheNumberofDriknsEqualsZero();
+            })
+          }
+        : null;
   }
 }

@@ -1,5 +1,7 @@
 import 'package:customer_app/view/screens/bar/bar_page.dart';
 import 'package:customer_app/view/screens/bar/bar_page_binding.dart';
+import 'package:customer_app/view/screens/cart/cart_binding.dart';
+import 'package:customer_app/view/screens/cart/cart_page.dart';
 import 'package:customer_app/view/screens/event_info/event_binding.dart';
 import 'package:customer_app/view/screens/event_info/event_info_page.dart';
 import 'package:customer_app/view/screens/landing/landing.dart';
@@ -29,4 +31,5 @@ appRoutes() => [
           name: '/Register',
           page: () => RegisterPage(),
           binding: RegisterBinding()),
+      GetPage(name: '/Cart', page: () => CartPage(), binding: CartBinding()),
     ];

@@ -30,7 +30,7 @@ Widget firstPlacesBody() {
       width: Get.size.width * .98,
       child: Stack(
         children: [
-          table(10, null, Get.size.width * .5 - 90, null, [1, 2, 3], true),
+          table(5, null, Get.size.width * .85 / 2 - 60, null, [1, 2, 3], true),
           table(
               Get.size.height * .5 / 2 - 90, null, 10, null, [4, 5, 6], false),
           table(
@@ -53,26 +53,23 @@ Widget secondPlacesBody() {
       width: Get.size.width * .98,
       child: Stack(
         children: [
-          table(
-              Get.size.height * .5 / 2 - 30, null, 100, null, [1, 2, 3], false),
-          table(
-              Get.size.height * .5 / 2 - 30, null, 10, null, [4, 5, 6], false),
-          table(
-              Get.size.height * .5 / 2 - 30, null, 190, null, [7, 8, 9], false),
-          singlePart(null, Get.size.height * .6 / 2 - 90, 10, null,
-              10), //this one should be in the top wall
-          singlePart(null, Get.size.height * .6 / 2 - 90, null, 10,
-              11), //this one should be in the top wall
-          singlePart(null, Get.size.height * .6 - 60, 10, null,
-              12), //this one should be in the top wall
-          singlePart(null, Get.size.height * .6 - 60, 10, null,
-              12), //this one should be in the bottom wall
-          singlePart(null, Get.size.height * .6 - 60, 10, null,
-              12), //this one should be in the bottom wall
-          singlePart(null, Get.size.height * .6 - 60, 10, null,
-              12), //this one should be in the start wall in the left
-          singlePart(null, Get.size.height * .6 - 60, 10, null,
-              12), //this one should be in the start wall in the right
+          //the middel tables.
+          table(110, null, Get.size.width * .5 - 35, null, [17, 18, 19], false),
+          table(260, null, Get.size.width * .5 - 35, null, [20, 21, 22], false),
+          //the chairs on the right
+          table(130, null, Get.size.width * .8, null, [23, 24, 25], false),
+          singlePart(280, null, Get.size.width * .8, null, 26),
+          //the chairs behind the band
+          singlePart(410, null, Get.size.width * .8, null, 27),
+          singlePart(480, null, Get.size.width * .8, null, 28),
+          //the double chair on the bottom
+          singlePart(25, null, Get.size.width * .5 - 35, null, 29),
+          //the chairs on the right
+          singlePart(270, null, Get.size.width * .12, null, 32),
+          singlePart(170, null, Get.size.width * .12, null, 31),
+          singlePart(70, null, Get.size.width * .12, null, 30),
+          //the double chairs on the stage.
+          singlePart(null, 100, 5, null, 33),
         ],
       ),
     ),
@@ -81,13 +78,13 @@ Widget secondPlacesBody() {
 
 Widget middelTable(List<int> sectionsNumbers) {
   return Positioned(
-    top: Get.size.height * .65 / 2,
+    top: Get.size.height * .5 / 2,
     left: Get.size.width * .95 / 2 - 60,
     child: Column(
       children: [
         Row(
           children: [
-            middleTablePart(
+            middelTablePart(
                 sharedPreferences!.getString('lang') == 'en'
                     ? 100
                     : sharedPreferences!.getString('lang') == 'ar'
@@ -101,7 +98,7 @@ Widget middelTable(List<int> sectionsNumbers) {
                 0,
                 0,
                 sectionsNumbers[0]),
-            middleTablePart(
+            middelTablePart(
                 sharedPreferences!.getString('lang') == 'en'
                     ? 0
                     : sharedPreferences!.getString('lang') == 'ar'
@@ -119,7 +116,7 @@ Widget middelTable(List<int> sectionsNumbers) {
         ),
         Row(
           children: [
-            middleTablePart(
+            middelTablePart(
                 0,
                 0,
                 sharedPreferences!.getString('lang') == 'en'
@@ -133,7 +130,7 @@ Widget middelTable(List<int> sectionsNumbers) {
                         ? 0
                         : 100,
                 sectionsNumbers[3]),
-            middleTablePart(
+            middelTablePart(
                 0,
                 0,
                 sharedPreferences!.getString('lang') == 'en'
@@ -154,7 +151,7 @@ Widget middelTable(List<int> sectionsNumbers) {
   );
 }
 
-Widget middleTablePart(double topLeft, double topRight, double bottomRight,
+Widget middelTablePart(double topLeft, double topRight, double bottomRight,
     double bottomLeft, int sectionNumber) {
   return Container(
       height: 60,
@@ -193,14 +190,14 @@ Widget table(double? bottom, double? top, double? left, double? right,
       left: left,
       child: isHorizontal
           ? Row(children: [
-              tablePart(sectionsNumber[0]),
-              tablePart(sectionsNumber[1]),
               tablePart(sectionsNumber[2]),
+              tablePart(sectionsNumber[1]),
+              tablePart(sectionsNumber[0]),
             ])
           : Column(children: [
-              tablePart(sectionsNumber[0]),
-              tablePart(sectionsNumber[1]),
               tablePart(sectionsNumber[2]),
+              tablePart(sectionsNumber[1]),
+              tablePart(sectionsNumber[0]),
             ]));
 }
 

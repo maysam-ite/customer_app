@@ -115,4 +115,12 @@ const Map<String, String> ar = {
   'Ticket Price: ': 'سعر التذكرة: ',
   'Description: ': 'الوصف:  ',
   'make a reservation': 'احجز',
+  "Section one": "القسم الاول",
+  "Section two": "القسم الثاني",
+  'Make a reservation': 'احجز',
+  'Enter your information': 'قم بادخال معلوماتك',
+  'Enter your name': 'قم بادخال الاسم',
+  "Number of setes": "عدد المقاعد",
+  'Cart page': 'صفحة التسوق',
+  "Price": 'السعر',
 };

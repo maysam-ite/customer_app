@@ -1,5 +1,6 @@
 import 'package:customer_app/constant/font.dart';
 import 'package:customer_app/constant/theme.dart';
+import 'package:customer_app/view/screens/bar/bar_page_controller.dart';
 import 'package:customer_app/view/screens/setting/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -248,9 +249,12 @@ class Setting extends StatelessWidget {
               return GestureDetector(
                   onTap: () {
                     themeController.changeTheme();
-                    Get.back();
+                    Get.offAllNamed('/');
                     Future.delayed(const Duration(milliseconds: 80), () {
-                      Get.offAllNamed('/Bar');
+                      Get.offAllNamed('/');
+
+                      BarPageController tabController = Get.find();
+                      tabController.update();
                     });
                   },
                   child: iconBox(
