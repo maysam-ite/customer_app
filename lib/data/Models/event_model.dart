@@ -4,7 +4,7 @@ class EventModel {
   int ticketPrice;
   int availablePlaces;
   String bandName;
-  DateTime beginDate;
+  String beginDate;
   int? adminId;
 
   EventModel(

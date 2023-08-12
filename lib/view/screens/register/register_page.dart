@@ -170,7 +170,7 @@ class RegisterPage extends StatelessWidget {
           color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
       widthOnTheScreen: size.textFieldWidth,
       onsaved: (value) {
-        controller.email = value!;
+        controller.lastName = value!;
       },
       hint: 'enter your last name'.tr,
       hintStyle: TextStyle(
@@ -198,7 +198,7 @@ class RegisterPage extends StatelessWidget {
           color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
       widthOnTheScreen: size.textFieldWidth,
       onsaved: (value) {
-        controller.email = value!;
+        controller.firstName = value!;
       },
       hint: 'enter your first name'.tr,
       hintStyle: TextStyle(
@@ -257,8 +257,8 @@ class RegisterPage extends StatelessWidget {
       mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
       myRadius: size.buttonRadius,
       ontap: () {
-        // controller.onpresslogin();
-        Get.offAllNamed('/LoginPage');
+         controller.onpresslogin();
+        //Get.offAllNamed('/LoginPage');
       },
       mywidth: size.normalButtonWidht,
       myheight: size.normalButtonHeight,

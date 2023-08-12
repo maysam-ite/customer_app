@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../widget/new_event_card.dart';
+import '../../widget/event_card.dart';
+import 'event_controller.dart';
 
 final List<NewEventCard> events = [
   NewEventCard(
@@ -214,12 +217,26 @@ final List<NewEventCard> events = [
   )),
 ];
 Widget buildEventGridView() {
+  EventController controller=Get.put(EventController());
   return ListView.builder(
-    itemCount: events.length - 1,
+    itemCount:controller.finalListData.length,
     itemBuilder: (context, index) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        child: events[index],
+        child:EventCard(event:  Event(
+    artistsNames: ['artist one', 'artist two', 'artist three'],
+    availablePlaces: 80,
+    beginDate: Date(year: "2009", dayName: '3',dayNumber: "3",month: "4",time: "23:00"),
+    description: 'very good',
+    eventName: controller.finalListData[index].title,
+    imagesNames: [
+      'assets/images/concert.png',
+      'assets/images/medium page background image.jpg',
+      'assets/images/tickets.png'
+    ],
+    ticketsPrice: 50,
+  ),)
+        ,
       );
     },
   );
