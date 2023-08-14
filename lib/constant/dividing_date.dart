@@ -4,7 +4,7 @@ class DateTimeParser {
   DateTimeParser(this.inputDateString);
 
   DateTime parseDateTime() {
-   /* List<String> parts = inputDateString.split(', ');
+    List<String> parts = inputDateString.split(', ');
     String datePart = parts[0];
     String timePart = parts[1];
 
@@ -17,10 +17,10 @@ class DateTimeParser {
     int hour = int.parse(timeComponents[0]);
     int minute = int.parse(timeComponents[1]);
     int second = int.parse(timeComponents[2]);
-*/
 
-    // return DateTime(year, month, day, hour, minute, second);
-    return DateTime.now();
+
+    return DateTime(year, month, day, hour, minute, second);
+    // return DateTime.now();
 
   }
 

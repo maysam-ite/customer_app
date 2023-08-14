@@ -10,6 +10,7 @@ import '../../widget/drawer.dart';
 import '../../widget/drink_card.dart';
 import '../../widget/general_text_style.dart';
 import '../events_page/event_page.dart';
+import '../places/places_controller.dart';
 import '../places/places_page.dart';
 import 'bar_page_controller.dart';
 
@@ -38,7 +39,7 @@ class BarPage extends StatelessWidget {
                           : Alignment.bottomRight,
               child: FloatingActionButton.extended(
                   onPressed: () {
-                     onpressedDone(controller.page.value, drinkCardContrller);
+                    onpressedDone(controller.page.value, drinkCardContrller);
                   },
                   label: Text('Done'.tr, style: generalTextStyle(null))),
             ),
@@ -155,10 +156,13 @@ class BarPage extends StatelessWidget {
   }
 
   void onpressedDone(int index, DrinkCardController drinkCardController) {
-    index == 2
-        ? {
-            Get.toNamed('/Cart', arguments: drinkCardController.order),
-          }
-        : null;
+    if (index == 2) {
+      Get.toNamed('/Cart', arguments: drinkCardController.order);
+    }else if(index ==1){
+      PlacesController controller=Get.find();
+      controller.onpressDone();
+    }
   }
 }
+/*
+        : null;*/

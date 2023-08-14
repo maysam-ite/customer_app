@@ -21,70 +21,80 @@ class MakeReservation extends StatelessWidget {
   Widget build(BuildContext context) {
     Sizes size = Sizes(context);
     return GetBuilder<MakeReservationController>(builder: (mcontext) {
-      return Container(
-        height: Get.size.height * .9,
-        width: context.widthInches > 5.5 ? 400 : Get.size.width * .85,
-        color: Get.isDarkMode ? Colors.black54 : skinColorWhite,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              createAppBar(size),
-              SizedBox(
-                height: sharedPreferences!.getString('lang') == 'en'
-                    ? Get.size.height * .02
-                    : Get.size.height * .01,
-              ),
-              dividerWithWord(
-                'Enter your information'.tr,
-                icon: Icon(
-                  Icons.event_available_rounded,
-                  color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
+      return Form(
+        key: controller.formstate,
+        child: Container(
+          height: Get.size.height * .9,
+          width: context.widthInches > 5.5 ? 400 : Get.size.width * .85,
+          color: Get.isDarkMode ? Colors.black54 : skinColorWhite,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                createAppBar(size),
+                SizedBox(
+                  height: sharedPreferences!.getString('lang') == 'en'
+                      ? Get.size.height * .02
+                      : Get.size.height * .01,
                 ),
-              ),
-              const SizedBox(height: 40),
-              generalInputTextFeild(size, Icons.person, 'Enter your name'.tr,
-                  (value) {}, TextInputType.name, (value) {
-                return null;
-              }),
-              generalInputTextFeild(
-                  size,
-                  Icons.confirmation_number,
-                  'Number of setes'.tr,
-                  (value) {},
-                  TextInputType.number, (value) {
-                return null;
-              }),
-              SizedBox(
-                height: Get.size.height * .5,
-              ),
-              MyButton(
-                mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
-                myRadius: size.buttonRadius,
-                ontap: () {},
-                mywidth: size.normalButtonWidht,
-                myheight: size.normalButtonHeight,
-                myShadow: 0,
-                child: controller.statuseRequest == StatuseRequest.loading
-                    ? Container(
-                        padding: const EdgeInsets.all(2),
-                        child: CircularProgressIndicator(
-                          color: Get.isDarkMode
-                              ? skinColorWhite
-                              : backGroundDarkColor,
-                        ),
-                      )
-                    : AutoSizeText(
-                        'Done'.tr,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: size.normalButtonTextSize,
-                            fontFamily: jostFontFamily,
+                dividerWithWord(
+                  'Enter your information'.tr,
+                  icon: Icon(
+                    Icons.event_available_rounded,
+                    color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                generalInputTextFeild(size, Icons.person, 'Enter your name'.tr,
+                    (value) {}, TextInputType.name, (value) {
+                  return null;
+                }),
+                generalInputTextFeild(
+                    size,
+                    Icons.confirmation_number,
+                    'Number of setes'.tr,
+                    (value) {
+                      controller.numberOfPlaces=value!;
+                    },
+                    TextInputType.number, (value) {
+                      if(int.parse(value!) <1){
+                        return "At least one persone";
+                      }
+                  return null;
+                }),
+                SizedBox(
+                  height: Get.size.height * .5,
+                ),
+                MyButton(
+                  mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
+                  myRadius: size.buttonRadius,
+                  ontap: () {
+                    controller.onpressDone();
+                  },
+                  mywidth: size.normalButtonWidht,
+                  myheight: size.normalButtonHeight,
+                  myShadow: 0,
+                  child: controller.statuseRequest == StatuseRequest.loading
+                      ? Container(
+                          padding: const EdgeInsets.all(2),
+                          child: CircularProgressIndicator(
                             color: Get.isDarkMode
                                 ? skinColorWhite
-                                : backGroundDarkColor),
-                      ),
-              )
-            ],
+                                : backGroundDarkColor,
+                          ),
+                        )
+                      : AutoSizeText(
+                          'Done'.tr,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: size.normalButtonTextSize,
+                              fontFamily: jostFontFamily,
+                              color: Get.isDarkMode
+                                  ? skinColorWhite
+                                  : backGroundDarkColor),
+                        ),
+                )
+              ],
+            ),
           ),
         ),
       );

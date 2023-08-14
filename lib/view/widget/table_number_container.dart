@@ -3,11 +3,17 @@ import 'package:customer_app/view/widget/general_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../screens/places/places_controller.dart';
+
 Widget sectionNumberContainer(int sectionNumber) {
   return Align(
     alignment: Alignment.center,
     child: GestureDetector(
-      onTap: () {},
+      onTap: () {
+          PlacesController dataController=Get.put(PlacesController());
+          dataController.section=sectionNumber;
+          print(dataController.section);
+      },
       child: Container(
         height: 35,
         width: 35,

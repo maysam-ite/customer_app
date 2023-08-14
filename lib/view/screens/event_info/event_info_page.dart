@@ -89,7 +89,7 @@ class EventInfo extends StatelessWidget {
           const Divider(
             height: 10,
           ),
-          setEventINfo('Artists: '),
+          setEventINfo('Artists: ${dataController.model.artist.map((artist) => artist.artistName).join(', ')}'),
           elementDivider(),
           const SizedBox(height: 3),
           setEventINfo(
