@@ -2,18 +2,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constant/dividing_date.dart';
 import '../../constant/font.dart';
+import '../../constant/server_const.dart';
+import '../../data/Models/event_model.dart';
 import '../../main.dart';
 import 'general_text_style.dart';
 
 class NewEventCard extends StatelessWidget {
-  final Event event;
+  final EventModel event;
   const NewEventCard({super.key, required this.event});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/EventInfo', arguments: event);
+        Get.toNamed('/EventInfo', arguments: event.id);
       },
       child: Container(
           height: 85, //Get.size.height * .12,
@@ -44,8 +47,8 @@ class NewEventCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(event.eventName, style: generalTextStyle(25)),
-                    timeContainer(event.beginDate.time),
+                    Text(event.title, style: generalTextStyle(25)),
+                    timeContainer("${event.beginDate.hour}:${event.beginDate.minute}"),
                   ],
                 ),
               ),
@@ -62,8 +65,11 @@ class NewEventCard extends StatelessWidget {
   Widget dateBox() {
     return Padding(
       padding: const EdgeInsets.all(6.0),
-      child: dateContainer(event.beginDate.month.toUpperCase(),
-          event.beginDate.dayNumber, event.beginDate.dayName.toUpperCase()),
+      child: dateContainer(event.beginDate.month.toString(),
+          event.beginDate.day.toString(),getDayName(event.beginDate.weekday)
+          
+         
+          ),
     );
   }
 
@@ -81,11 +87,11 @@ class NewEventCard extends StatelessWidget {
         height: 100,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(900),
-          child: Image.asset(
-            event.imagesNames[1],
-            fit: BoxFit.fill,
-          ),
-        ),
+          child:  event.images.isEmpty 
+                        ? Image.asset('assets/images/The project icon.jpg',fit:BoxFit.fill)
+                        : Image.network(
+                            "${ServerConstApis.loadImages}${event.images[0].picture}",fit:BoxFit.fill))
+        
       ),
     );
   }

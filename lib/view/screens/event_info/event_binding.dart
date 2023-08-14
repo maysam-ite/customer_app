@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'event_controller.dart';
+import 'event_info_controller.dart';
 
 class EventInfoBinding implements Bindings {
   @override

@@ -10,13 +10,17 @@ import 'package:customer_app/view/widget/drink_card.dart';
 import '../../../constant/font.dart';
 import '../../../constant/sizes.dart';
 import '../../../constant/theme.dart';
+import '../../../data/Models/drink_model.dart';
 import '../../widget/animation_title.dart';
+import 'cart_controller.dart';
 
+// ignore: must_be_immutable
 class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+  CartPage({super.key});
+  CartController controller = Get.put(CartController());
+
   @override
   Widget build(BuildContext context) {
-    Order order = Get.arguments;
     final Sizes size = Sizes(context);
     return Scaffold(
       appBar: createAppBar(size),
@@ -25,16 +29,17 @@ class CartPage extends StatelessWidget {
           SizedBox(
             height: Get.size.height * .75,
             child: ListView.builder(
-                itemCount: order.drinksWithAmount.length,
-                itemBuilder: ((context, index) =>
-                        cartCard(order, index, context, size)
-                    // cartElement(order, index, context, size)
-                    )),
+                itemCount: controller.order.drinksWithAmount.length,
+                itemBuilder: ((context, index) {
+                  print(index);
+                  return cartCard(controller.order, index, context, size);
+                  // cartElement(order, index, context, size)
+                })),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              '${'Total price'.tr}: ${order.calculateTotalPrice()}S.P',
+              '${'Total price'.tr}: ${controller.order.calculateTotalPrice()}S.P',
               style: TextStyle(
                 fontFamily: jostFontFamily,
                 color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor,
@@ -49,8 +54,9 @@ class CartPage extends StatelessWidget {
               mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
               myRadius: size.buttonRadius,
               ontap: () {
+                print(controller.order.drinksWithAmount.length);
+                controller.onpressDone();
                 //send the data to the backend and go back to the prev page.
-                Get.back();
               },
               mywidth: size.normalButtonWidht,
               myheight: size.normalButtonHeight,
@@ -71,7 +77,8 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  Widget cartCard(Order order, int index, BuildContext context, Sizes size) {
+  Widget cartCard(
+      MakeOrder order, int index, BuildContext context, Sizes size) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       child: Card(
@@ -115,7 +122,17 @@ class CartPage extends StatelessWidget {
   }
 
   PreferredSizeWidget? createAppBar(Sizes size) {
+    DrinkCardController drinkCardController = Get.find();
     return AppBar(
+      leading: BackButton(
+        onPressed: () {
+          Get.back();
+          Future.delayed(const Duration(milliseconds: 80), () {
+            drinkCardController.order.makeTheOrderEmpty();
+            drinkCardController.makeTheNumberofDriknsEqualsZero();
+          });
+        },
+      ),
       iconTheme: IconThemeData(
           color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
       elevation: 0.4,
@@ -137,12 +154,12 @@ class CartPage extends StatelessWidget {
   }
 }
 
-class Order {
+class MakeOrder {
   List<DrinkAmount> drinksWithAmount = [];
   double calculatePrice(int id) {
     double price = 0;
     for (int i = 0; i < drinksWithAmount[id].amount.toInt(); i++) {
-      price += drinksWithAmount[id].drink.unitPriceInSP;
+      price += drinksWithAmount[id].drink.price;
     }
     return price;
   }
@@ -151,7 +168,7 @@ class Order {
     double totalPrice = 0;
     for (var element in drinksWithAmount) {
       for (int i = 0; i < element.amount; i++) {
-        totalPrice += element.drink.unitPriceInSP;
+        totalPrice += element.drink.price;
       }
     }
     return totalPrice;
@@ -163,7 +180,7 @@ class Order {
 }
 
 class DrinkAmount {
-  Drink drink;
+  DrinkModel drink;
   int amount;
   DrinkAmount({
     required this.drink,
