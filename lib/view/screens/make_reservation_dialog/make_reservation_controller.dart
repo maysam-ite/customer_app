@@ -1,4 +1,3 @@
-import 'package:customer_app/view/screens/places/places_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,29 +7,30 @@ import '../../../general_controllers/statuse_request_controller.dart';
 import '../../../main.dart';
 import '../../widget/snak_bar_for_errors.dart';
 import '../event_info/event_info_controller.dart';
+import 'make_reservation_service.dart';
 
-class PlacesController extends GetxController
+class MakeReservationController extends GetxController
  implements StatuseRequestController {
-  late String reservationId;
+  late String numberOfPlaces;
   // late String email;
-  late int? section;
   @override
   StatuseRequest? statuseRequest = StatuseRequest.init;
 
-  PlaceService service = PlaceService();
+  MakeReservationService service = MakeReservationService();
   late GlobalKey<FormState> formstate;
 
   @override
   void onInit() async {
- reservationId='36';
- section=null;
+ numberOfPlaces='';
     formstate = GlobalKey<FormState>();
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
   }
 
   void onpressDone() async {
-   
+    FormState? formdata = formstate.currentState;
+    if (formdata!.validate()) {
+      formdata.save();
       statuseRequest = StatuseRequest.loading;
       update();
       dynamic response =
@@ -43,7 +43,7 @@ class PlacesController extends GetxController
       Get.offAllNamed('LoginPage');
     } else {
         
-      
+      }
     }
     update();
   }
@@ -51,15 +51,16 @@ class PlacesController extends GetxController
  
 
   sendData() async {
-    
+    EventInfoController eventInfoController=Get.find();
+    int eventId=eventInfoController.eventId;
      String token = await prefService.readString('token');
    
     Map<String, String> data = {
-    "reservation_id" : reservationId,
-    "section_number": section.toString()
+    "event_id": eventId.toString(),
+    "number_of_places": numberOfPlaces
 };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
-        await service.setSection(token ,data);
+        await service.makeReservation(token ,data);
 
     return response.fold((l) => l, (r) => r);
   }
@@ -73,6 +74,6 @@ class PlacesController extends GetxController
   }
 
   whenLoginSuccess(response) async {
-   
+    Get.back();
     update();
   }}

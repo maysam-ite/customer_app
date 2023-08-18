@@ -42,22 +42,16 @@ class RegisterPage extends StatelessWidget {
   Widget bodyWithLoginElements(Sizes size, BuildContext context) {
     return Form(
       key: controller.formstate,
-      child: Stack(
-        children: [
-          putBackgroundImage(context),
-          Positioned(
-            top: Get.size.height * .1,
-            left: Get.size.width * .05,
-            right: Get.size.width * .05,
-            child: SizedBox(
+      child:  Container(
+
               width: Get.size.width,
               height: Get.size.height,
-              //decoration: floatingContainerBoxDecoration(),
+              decoration:const BoxDecoration(
+                image: DecorationImage(fit: BoxFit.fill,image:AssetImage( 'assets/images/medium page background image.jpg') )
+              ),
               child: theLoginColumnBody(size),
             ),
-          ),
-        ],
-      ),
+        
     );
   }
 

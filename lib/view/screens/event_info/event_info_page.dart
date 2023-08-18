@@ -7,29 +7,32 @@ import '../../../constant/sizes.dart';
 import '../../../constant/theme.dart';
 import '../../widget/event_card.dart';
 import '../../widget/general_text_style.dart';
-import '../../widget/new_event_card.dart';
 import '../make_reservation_dialog/make_reservation_dialog_view.dart';
+import 'event_info_controller.dart';
 
+// ignore: must_be_immutable
 class EventInfo extends StatelessWidget {
   EventInfo({super.key});
-  final Event event = Get.arguments;
+  //final EventModel event = Get.arguments;
   final EventCardController controller = Get.find();
   final PageController pageController = PageController();
-
+  EventInfoController dataController = Get.find();
   @override
   Widget build(BuildContext context) {
     Sizes size = Sizes(context);
-    return Scaffold(
-      body: SafeArea(child: cardBody(size)),
-      floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
-          label: TextButton(
-              onPressed: () {
-                showMakeResrvationDialog(context);
-              },
-              child:
-                  Text('Make a reservation'.tr, style: generalTextStyle(16)))),
-    );
+    return GetBuilder<EventInfoController>(builder: (mcontext) {
+      return Scaffold(
+        body: SafeArea(child: cardBody(size)),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {},
+            label: TextButton(
+                onPressed: () {
+                  showMakeResrvationDialog(context);
+                },
+                child: Text('Make a reservation'.tr,
+                    style: generalTextStyle(16)))),
+      );
+    });
   }
 
   Widget cardBody(Sizes size) {
@@ -76,7 +79,7 @@ class EventInfo extends StatelessWidget {
             height: 10,
           ),
           Text(
-            event.eventName,
+            dataController.model.title,
             style: TextStyle(
                 color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor,
                 fontSize: 23,
@@ -86,29 +89,26 @@ class EventInfo extends StatelessWidget {
           const Divider(
             height: 10,
           ),
+          setEventINfo('Artists: ${dataController.model.artist.map((artist) => artist.artistName).join(', ')}'),
+          elementDivider(),
+          const SizedBox(height: 3),
           setEventINfo(
-            'Artists: '.tr +
-                event.artistsNames.join(
-                    "\n"), //event.artist[index].name+event.artist[index].playWith
+            '${'Date: '.tr}${dataController.model.beginDate.day}/${dataController.model.beginDate.month}/${dataController.model.beginDate.year}',
           ),
           elementDivider(),
           const SizedBox(height: 3),
           setEventINfo(
-            '${'Date: '.tr}${event.beginDate.dayNumber}/${event.beginDate.month}/${event.beginDate.year}',
+            'Available Places: '.tr +
+                dataController.model.availablePlaces.toString(),
           ),
           elementDivider(),
           const SizedBox(height: 3),
           setEventINfo(
-            'Available Places: '.tr + event.availablePlaces.toString(),
+            '${'Ticket Price: '.tr}${dataController.model.ticketPrice} ${'S.P'.tr}',
           ),
           elementDivider(),
           const SizedBox(height: 3),
-          setEventINfo(
-            '${'Ticket Price: '.tr}${event.ticketsPrice} ${'S.P'.tr}',
-          ),
-          elementDivider(),
-          const SizedBox(height: 3),
-          setEventINfo('Description: '.tr + event.description),
+          setEventINfo('Description: '.tr + dataController.model.description),
         ],
       ),
     );
@@ -125,15 +125,15 @@ class EventInfo extends StatelessWidget {
         return PageView.builder(
           onPageChanged: controller.setPageIndex,
           controller: pageController, //controller.pageController,
-          itemCount: event.imagesNames.length,
+          itemCount: dataController.model.images.length,
           itemBuilder: (context, index) {
             return ClipRRect(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(size.buttonRadius),
                 topRight: Radius.circular(size.buttonRadius),
               ),
-              child: Image.asset(
-                event.imagesNames[index],
+              child: Image.network(
+                dataController.model.images[index].picture,
                 fit: BoxFit.fill,
               ),
             );
@@ -148,7 +148,7 @@ class EventInfo extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
-          event.imagesNames.length,
+          dataController.model.images.length,
           (index) =>
               buildDot(index: index, currentIndex: controller.pageIndex.value),
         ),
@@ -186,7 +186,7 @@ class EventInfo extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: const MakeReservation(),
+          child: MakeReservation(),
         );
       },
     );

@@ -24,7 +24,7 @@ class EventController extends GetxController
   }
 
   Future<List<EventModel>> sendingARequestAndHandlingData() async {
-    print("drrrrrrrrrrrrrrr");
+    // print("drrrrrrrrrrrrrrr");
     statuseRequest = StatuseRequest.loading;
     update();
     dynamic response =
@@ -61,12 +61,13 @@ class EventController extends GetxController
   }
 
   Future<List<EventModel>> whenGetDataSuccess(response) async {
-    List responsedata = response['data'];
+    List responsedata = response['data']['upComing'];
+    // print(responsedata);
     for (int i = 0; i < responsedata.length; i++) {
+      // print(i);
       finalListData.add(EventModel.fromMap(responsedata[i]));
     }
-
-
+// print("${finalListData[0].beginDate.hour}:${finalListData[0].beginDate.minute}");
     update();
     return finalListData;
   }

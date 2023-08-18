@@ -1,4 +1,5 @@
 import 'package:customer_app/constant/theme.dart';
+import 'package:customer_app/view/screens/places/places_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -202,14 +203,19 @@ Widget table(double? bottom, double? top, double? left, double? right,
 }
 
 Widget tablePart(int sectionNumber) {
-  return Container(
-    width: 60,
-    height: 50,
-    decoration: BoxDecoration(
-        border: Border.all(
-            color: Get.isDarkMode ? skinColorWhite! : backGroundDarkColor,
-            width: 0.5),
-        color: tablesColor),
-    child: sectionNumberContainer(sectionNumber),
+  return GestureDetector(
+    onTap: (){
+      // print(sectionNumber);
+    },
+    child: Container(
+      width: 60,
+      height: 50,
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: Get.isDarkMode ? skinColorWhite! : backGroundDarkColor,
+              width: 0.5),
+          color: tablesColor),
+      child: sectionNumberContainer(sectionNumber),
+    ),
   );
 }

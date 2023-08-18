@@ -10,6 +10,7 @@ import '../../widget/drawer.dart';
 import '../../widget/drink_card.dart';
 import '../../widget/general_text_style.dart';
 import '../events_page/event_page.dart';
+import '../places/places_controller.dart';
 import '../places/places_page.dart';
 import 'bar_page_controller.dart';
 
@@ -91,28 +92,32 @@ class BarPage extends StatelessWidget {
     return ([list[controller.page.value]]);
   }
 
-  Widget buildBarGridView(Color? color, BuildContext context,
+  Widget buildBarGridView(Color? color, BuildContext ccontext,
       DrinkCardController drinkCardContrller) {
-    return GridView.builder(
-      padding: const EdgeInsets.all(16),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: context.widthInches > 8.5
-            ? 4
-            : context.widthInches > 5.5
-                ? 3
-                : 2,
-        mainAxisExtent: 230,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 16,
-      ),
-      itemCount: 16,
-      itemBuilder: (context, index) {
-        drinkCardContrller.addNewElement();
-        return DrinkCard(
-          drink: Drink(id: index, name: 'beer+$index', unitPriceInSP: 15000),
-        );
-      },
-    );
+    return GetBuilder(
+        init: drinkCardContrller,
+        builder: (context) {
+          return GridView.builder(
+            padding: const EdgeInsets.all(16),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: ccontext.widthInches > 8.5
+                  ? 4
+                  : ccontext.widthInches > 5.5
+                      ? 3
+                      : 2,
+              mainAxisExtent: 230,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 16,
+            ),
+            itemCount: drinkCardContrller.finalListData.length,
+            itemBuilder: (context, index) {
+              return DrinkCard(
+                id: index,
+                drink: drinkCardContrller.finalListData[index],
+              );
+            },
+          );
+        });
   }
 
   PreferredSizeWidget? createAppBar(
@@ -155,15 +160,13 @@ class BarPage extends StatelessWidget {
   }
 
   void onpressedDone(int index, DrinkCardController drinkCardController) {
-    index == 2
-        ? {
-            Get.offNamed('/Cart', arguments: drinkCardController.order),
-          }
-        : null;
+    if (index == 2) {
+      Get.toNamed('/Cart', arguments: drinkCardController.order);
+    } else if (index == 1) {
+      PlacesController controller = Get.find();
+      controller.onpressDone();
+    }
   }
 }
-/*            Future.delayed(const Duration(milliseconds: 80), () {
-              drinkCardController.order.makeTheOrderEmpty();
-              drinkCardContrller.makeTheNumberofDriknsEqualsZero();
-            })
- */
+/*
+        : null;*/
