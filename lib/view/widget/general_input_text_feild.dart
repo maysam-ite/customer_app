@@ -14,7 +14,7 @@ Widget generalInputTextFeild(
     TextInputType? inputtype,
     String? Function(String?)? validat) {
   return Padding(
-    padding: const EdgeInsets.all(12.0),
+    padding: const EdgeInsets.all(5.0),
     child: CostumTextField(
       validat: validat,
       inputtype: inputtype,

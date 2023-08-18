@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:customer_app/view/widget/general_input_text_feild.dart';
 import 'package:customer_app/view/widget/general_text_style.dart';
 import 'package:customer_app/view/widget/my_button.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +23,21 @@ class CartPage extends StatelessWidget {
       appBar: createAppBar(size),
       body: Column(
         children: [
-          SizedBox(
-            height: Get.size.height * .75,
-            child: ListView.builder(
-                itemCount: order.drinksWithAmount.length,
-                itemBuilder: ((context, index) =>
-                        cartCard(order, index, context, size)
-                    // cartElement(order, index, context, size)
-                    )),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Get.isDarkMode ? darkPrimaryColor : primaryColor)),
+              height: Get.size.height * .75,
+              child: ListView.builder(
+                  itemCount: order.drinksWithAmount.length,
+                  itemBuilder: ((context, index) =>
+                          cartCard(order, index, context, size)
+                      // cartElement(order, index, context, size)
+                      )),
+            ),
           ),
+          descriptionTextField(size),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -43,30 +50,50 @@ class CartPage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: MyButton(
-              mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
-              myRadius: size.buttonRadius,
-              ontap: () {
-                //send the data to the backend and go back to the prev page.
-                Get.back();
-              },
-              mywidth: size.normalButtonWidht,
-              myheight: size.normalButtonHeight,
-              myShadow: 0,
-              child: AutoSizeText(
-                'Done'.tr,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    fontSize: size.normalButtonTextSize,
-                    fontFamily: jostFontFamily,
-                    color:
-                        Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
-              ),
-            ),
-          )
+          doneButton(size),
         ],
+      ),
+    );
+  }
+
+  Widget descriptionTextField(Sizes size) {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          height: 50,
+          child: generalInputTextFeild(size, Icons.text_snippet_outlined,
+              'Enter your description', (vlue) {}, TextInputType.text, (value) {
+            return null;
+          }),
+        ),
+      ],
+    );
+  }
+
+  Widget doneButton(Sizes size) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: MyButton(
+        mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
+        myRadius: size.buttonRadius,
+        ontap: () {
+          //send the data to the backend and go back to the prev page.
+          Get.back();
+        },
+        mywidth: size.normalButtonWidht,
+        myheight: size.normalButtonHeight,
+        myShadow: 0,
+        child: AutoSizeText(
+          'Done'.tr,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              fontSize: size.normalButtonTextSize,
+              fontFamily: jostFontFamily,
+              color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor),
+        ),
       ),
     );
   }

@@ -36,11 +36,15 @@ class BarPage extends StatelessWidget {
                       : sharedPreferences!.getString('lang') == 'ar'
                           ? Alignment.bottomLeft
                           : Alignment.bottomRight,
-              child: FloatingActionButton.extended(
-                  onPressed: () {
-                    onpressedDone(controller.page.value, drinkCardContrller);
-                  },
-                  label: Text('Done'.tr, style: generalTextStyle(null))),
+              child: Obx(() => Visibility(
+                    visible: controller.page.value != 0,
+                    child: FloatingActionButton.extended(
+                        onPressed: () {
+                          onpressedDone(
+                              controller.page.value, drinkCardContrller);
+                        },
+                        label: Text('Done'.tr, style: generalTextStyle(null))),
+                  )),
             ),
           )),
       extendBody: true,
@@ -153,12 +157,13 @@ class BarPage extends StatelessWidget {
   void onpressedDone(int index, DrinkCardController drinkCardController) {
     index == 2
         ? {
-            Get.toNamed('/Cart', arguments: drinkCardController.order),
-            Future.delayed(const Duration(milliseconds: 80), () {
-              drinkCardController.order.makeTheOrderEmpty();
-              drinkCardContrller.makeTheNumberofDriknsEqualsZero();
-            })
+            Get.offNamed('/Cart', arguments: drinkCardController.order),
           }
         : null;
   }
 }
+/*            Future.delayed(const Duration(milliseconds: 80), () {
+              drinkCardController.order.makeTheOrderEmpty();
+              drinkCardContrller.makeTheNumberofDriknsEqualsZero();
+            })
+ */
