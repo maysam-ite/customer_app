@@ -48,7 +48,8 @@ class NewEventCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(event.title, style: generalTextStyle(25)),
-                    timeContainer("${event.beginDate.hour}:${event.beginDate.minute}"),
+                    timeContainer(
+                        "${event.beginDate.hour}:${event.beginDate.minute}"),
                   ],
                 ),
               ),
@@ -66,10 +67,7 @@ class NewEventCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: dateContainer(event.beginDate.month.toString(),
-          event.beginDate.day.toString(),getDayName(event.beginDate.weekday)
-          
-         
-          ),
+          event.beginDate.day.toString(), getDayName(event.beginDate.weekday)),
     );
   }
 
@@ -77,22 +75,22 @@ class NewEventCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 15.6, top: 6, right: 6, bottom: 6),
       child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(900),
-            border: Border.all(
-              color: Colors.black54,
-              width: 0.2,
-            )),
-        width: 100,
-        height: 100,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(900),
-          child:  event.images.isEmpty 
-                        ? Image.asset('assets/images/The project icon.jpg',fit:BoxFit.fill)
-                        : Image.network(
-                            "${ServerConstApis.loadImages}${event.images[0].picture}",fit:BoxFit.fill))
-        
-      ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(900),
+              border: Border.all(
+                color: Colors.black54,
+                width: 0.2,
+              )),
+          width: 85,
+          height: 100,
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(900),
+              child: event.images.isEmpty
+                  ? Image.asset('assets/images/The project icon.jpg',
+                      fit: BoxFit.fill)
+                  : Image.network(
+                      "${ServerConstApis.loadImages}${event.images[0].picture}",
+                      fit: BoxFit.fill))),
     );
   }
 

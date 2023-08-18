@@ -1,6 +1,3 @@
-
-import 'package:connectivity_plus/connectivity_plus.dart';
-
 checkInternet() async {
   // try {
   //   final connectivityResult = await (Connectivity().checkConnectivity());

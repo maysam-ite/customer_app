@@ -1,39 +1,16 @@
+import 'package:customer_app/view/screens/events_page/event_controller.dart';
+import 'package:customer_app/view/widget/new_event_card.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-
-import '../../widget/new_event_card.dart';
-// import '../../widget/event_card.dart';
-// import 'event_controller.dart';
+import 'package:get/get.dart';
 
 Widget buildEventGridView() {
-  // EventController controller = Get.put(EventController());
+  EventController controller = Get.put(EventController());
   return ListView.builder(
-      // itemCount: controller.finalListData.length,
-      itemCount: events.length,
+      itemCount: controller.finalListData.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-          child: events[index],
-          // EventCard(
-          //   event: Event(
-          //     artistsNames: ['artist one', 'artist two', 'artist three'],
-          //     availablePlaces: 80,
-          //     beginDate: Date(
-          //         year: "2009",
-          //         dayName: '3',
-          //         dayNumber: "3",
-          //         month: "4",
-          //         time: "23:00"),
-          //     description: 'very good',
-          //     eventName: controller.finalListData[index].title,
-          //     imagesNames: [
-          //       'assets/images/concert.png',
-          //       'assets/images/medium page background image.jpg',
-          //       'assets/images/tickets.png'
-          //     ],
-          //     ticketsPrice: 50,
-          //   ),
-          // ),
+          child: NewEventCard(event: controller.finalListData[index]),
         );
       });
 }

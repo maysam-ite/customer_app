@@ -34,9 +34,9 @@ class CartPage extends StatelessWidget {
                       color: Get.isDarkMode ? darkPrimaryColor : primaryColor)),
               height: Get.size.height * .75,
               child: ListView.builder(
-                  itemCount: order.drinksWithAmount.length,
+                  itemCount: controller.order.drinksWithAmount.length,
                   itemBuilder: ((context, index) =>
-                          cartCard(order, index, context, size)
+                          cartCard(controller.order, index, context, size)
                       // cartElement(order, index, context, size)
                       )),
             ),

@@ -26,6 +26,9 @@ class LoginService {
         } else if (response.statusCode == 400) {
           return const Left(StatuseRequest.validationfailuer);
         } else if (response.statusCode == 401) {
+          print('response.body: ');
+          print(response.body);
+          print(data);
           return const Left(StatuseRequest.authfailuer);
         } else {
           return const Left(StatuseRequest.serverfailure);

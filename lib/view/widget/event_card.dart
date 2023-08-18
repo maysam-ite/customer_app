@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:customer_app/data/Models/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constant/font.dart';
@@ -6,11 +7,10 @@ import '../../constant/sizes.dart';
 import '../../constant/theme.dart';
 import '../../main.dart';
 import 'general_text_style.dart';
-import 'new_event_card.dart';
 
 class EventCard extends StatelessWidget {
   final EventCardController controller = Get.put(EventCardController());
-  final Event event;
+  final EventModel event;
 
   EventCard({Key? key, required this.event}) : super(key: key);
 
@@ -68,7 +68,7 @@ class EventCard extends StatelessWidget {
                             ? 10
                             : null,
                     child: Text(
-                      event.eventName,
+                      event.title,
                       style: TextStyle(
                           color: skinColorWhite,
                           fontSize: 23,
@@ -82,14 +82,13 @@ class EventCard extends StatelessWidget {
             const SizedBox(height: 10),
             buildDots(),
             const SizedBox(height: 3),
-            setEventINfo(
-              'Artists: '.tr +
-                  event.artistsNames.join(
-                      ", "), //event.artist[index].name+event.artist[index].playWith
-            ),
+            setEventINfo('Artists: '.tr +
+                    event
+                        .bandName //event.artist[index].name+event.artist[index].playWith
+                ),
             const SizedBox(height: 3),
             setEventINfo(
-              '${'Date: '.tr}${event.beginDate.dayNumber}/${event.beginDate.month}/${event.beginDate.year}',
+              '${'Date: '.tr}${event.beginDate.day}/${event.beginDate.month}/${event.beginDate.year}',
             ),
             const SizedBox(height: 3),
             setEventINfo(
@@ -116,7 +115,7 @@ class EventCard extends StatelessWidget {
         return PageView.builder(
           onPageChanged: controller.setPageIndex,
           controller: controller.pageController,
-          itemCount: event.imagesNames.length,
+          itemCount: event.images.length,
           itemBuilder: (context, index) {
             return ClipRRect(
               borderRadius: BorderRadius.only(
@@ -131,7 +130,7 @@ class EventCard extends StatelessWidget {
                     left: 0,
                     right: 0,
                     child: Image.asset(
-                      event.imagesNames[index],
+                      event.images as String,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -164,7 +163,7 @@ class EventCard extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
-          event.imagesNames.length,
+          event.images.length,
           (index) =>
               buildDot(index: index, currentIndex: controller.pageIndex.value),
         ),

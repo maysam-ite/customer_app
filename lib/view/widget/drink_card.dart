@@ -13,7 +13,6 @@ import '../../data/Models/drink_model.dart';
 import '../../general_controllers/statuse_request_controller.dart';
 import '../../main.dart';
 import '../screens/bar/bar_page_service.dart';
-import '../screens/cart/cart_service.dart.dart';
 import 'general_text_style.dart';
 import 'no_internet_page.dart';
 
@@ -22,7 +21,7 @@ class DrinkCard extends StatelessWidget {
   DrinkModel drink;
   int id;
   Function()? onPressed;
-  DrinkCard({super.key, required this.id,required this.drink, this.onPressed});
+  DrinkCard({super.key, required this.id, required this.drink, this.onPressed});
   @override
   Widget build(BuildContext context) {
     DrinkCardController controller = Get.put(
@@ -74,11 +73,9 @@ class DrinkCard extends StatelessWidget {
                           addRemoveButton('add', controller),
                           const Spacer(),
                           Obx(() => Text(
-                                controller.numberOfDrinks[id].value
-                                    .toString(),
+                                controller.numberOfDrinks[id].value.toString(),
                                 style: TextStyle(
                                   color: skinColorWhite,
-                               
                                 ),
                               )),
                           const Spacer(),
@@ -114,10 +111,10 @@ class DrinkCard extends StatelessWidget {
       width: 60,
       child: MaterialButton(
         onPressed: () {
-            addOrRemove == 'add'
+          addOrRemove == 'add'
               ? drinkCardController.increaseTheNumberOfDrinks(id, drink)
               : drinkCardController.decreaseTheNumberOfDrinks(id);
-        //  add one from this drink or remove one of the drink
+          //  add one from this drink or remove one of the drink
         },
         child: Icon(
           addOrRemove == 'add' ? Icons.add : Icons.remove,
@@ -128,8 +125,6 @@ class DrinkCard extends StatelessWidget {
     );
   }
 }
-
-
 
 class DrinkCardController extends GetxController
     implements StatuseRequestController {
@@ -194,7 +189,8 @@ class DrinkCardController extends GetxController
     update();
     return finalListData;
   }
-  MakeOrder order=MakeOrder();
+
+  MakeOrder order = MakeOrder();
   void increaseTheNumberOfDrinks(int id, DrinkModel drink) {
     numberOfDrinks[id].value++;
     if (ifAddForTheFirstTime(drink)) {

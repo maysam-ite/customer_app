@@ -7,10 +7,9 @@ import '../../../constant/status_request.dart';
 import '../../../general_controllers/statuse_request_controller.dart';
 import '../../../main.dart';
 import '../../widget/snak_bar_for_errors.dart';
-import '../event_info/event_info_controller.dart';
 
 class PlacesController extends GetxController
- implements StatuseRequestController {
+    implements StatuseRequestController {
   late String reservationId;
   // late String email;
   late int? section;
@@ -22,44 +21,37 @@ class PlacesController extends GetxController
 
   @override
   void onInit() async {
- reservationId='36';
- section=null;
+    reservationId = '36';
+    section = null;
     formstate = GlobalKey<FormState>();
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
   }
 
   void onpressDone() async {
-   
-      statuseRequest = StatuseRequest.loading;
-      update();
-      dynamic response =
-          await sendData(); // check if the return data is statuseRequest or real data
-      statuseRequest = handlingData(response); //return the statuseResponse
-      if (statuseRequest == StatuseRequest.success) {
-        whenLoginSuccess(response);
-      } else if (statuseRequest == StatuseRequest.authfailuer) {
+    statuseRequest = StatuseRequest.loading;
+    update();
+    dynamic response =
+        await sendData(); // check if the return data is statuseRequest or real data
+    statuseRequest = handlingData(response); //return the statuseResponse
+    if (statuseRequest == StatuseRequest.success) {
+      whenLoginSuccess(response);
+    } else if (statuseRequest == StatuseRequest.authfailuer) {
       snackBarForErrors("Auth error", "Please login again");
       Get.offAllNamed('LoginPage');
-    } else {
-        
-      
-    }
+    } else {}
     update();
   }
 
- 
-
   sendData() async {
-    
-     String token = await prefService.readString('token');
-   
+    String token = await prefService.readString('token');
+
     Map<String, String> data = {
-    "reservation_id" : reservationId,
-    "section_number": section.toString()
-};
+      "reservation_id": reservationId,
+      "section_number": section.toString()
+    };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
-        await service.setSection(token ,data);
+        await service.setSection(token, data);
 
     return response.fold((l) => l, (r) => r);
   }
@@ -73,6 +65,6 @@ class PlacesController extends GetxController
   }
 
   whenLoginSuccess(response) async {
-   
     update();
-  }}
+  }
+}
