@@ -32,7 +32,9 @@ class BottomNavBarState extends State<BottomNavBar> {
         bottomBarUnit('Bar', Icons.wine_bar_rounded),
       ],
       color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
-      buttonBackgroundColor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
+      buttonBackgroundColor: Get.isDarkMode
+          ? darkPrimaryColor.withOpacity(0.7)
+          : primaryColor.withOpacity(0.7),
       backgroundColor: Get.isDarkMode
           ? backGroundDarkColor.withOpacity(0.1)
           : skinColorWhite!.withOpacity(0.1),

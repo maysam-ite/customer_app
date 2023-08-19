@@ -39,7 +39,7 @@ class DrinkCard extends StatelessWidget {
                 : woodBrownColor.withOpacity(0.9),
             borderRadius: BorderRadius.circular(size.buttonRadius)),
         width: 100, //size.drinkCardWidth,
-        height: 210,
+        height: 220,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -91,7 +91,9 @@ class DrinkCard extends StatelessWidget {
               ),
               AutoSizeText(
                 drink.name,
-                style: generalTextStyle(20),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: generalTextStyle(18),
               ),
               const SizedBox(
                 height: 3,
