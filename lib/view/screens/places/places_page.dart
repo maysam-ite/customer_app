@@ -1,5 +1,4 @@
 import 'package:customer_app/constant/theme.dart';
-import 'package:customer_app/view/screens/places/places_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -204,7 +203,7 @@ Widget table(double? bottom, double? top, double? left, double? right,
 
 Widget tablePart(int sectionNumber) {
   return GestureDetector(
-    onTap: (){
+    onTap: () {
       // print(sectionNumber);
     },
     child: Container(

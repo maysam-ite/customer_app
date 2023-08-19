@@ -64,10 +64,7 @@ class LoginController extends GetxController
   }
 
   logindata() async {
-    Map<String, String> data = {
-      "email": "email3@gmail.com",
-      "password": "12345678"
-    };
+    Map<String, String> data = {"email": email, "password": password};
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
         await service.login(data);
 

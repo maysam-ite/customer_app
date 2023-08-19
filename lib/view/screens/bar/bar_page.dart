@@ -37,11 +37,15 @@ class BarPage extends StatelessWidget {
                       : sharedPreferences!.getString('lang') == 'ar'
                           ? Alignment.bottomLeft
                           : Alignment.bottomRight,
-              child: FloatingActionButton.extended(
-                  onPressed: () {
-                    onpressedDone(controller.page.value, drinkCardContrller);
-                  },
-                  label: Text('Done'.tr, style: generalTextStyle(null))),
+              child: Obx(() => Visibility(
+                    visible: controller.page.value != 0,
+                    child: FloatingActionButton.extended(
+                        onPressed: () {
+                          onpressedDone(
+                              controller.page.value, drinkCardContrller);
+                        },
+                        label: Text('Done'.tr, style: generalTextStyle(null))),
+                  )),
             ),
           )),
       extendBody: true,
@@ -158,8 +162,8 @@ class BarPage extends StatelessWidget {
   void onpressedDone(int index, DrinkCardController drinkCardController) {
     if (index == 2) {
       Get.toNamed('/Cart', arguments: drinkCardController.order);
-    }else if(index ==1){
-      PlacesController controller=Get.find();
+    } else if (index == 1) {
+      PlacesController controller = Get.find();
       controller.onpressDone();
     }
   }
