@@ -22,7 +22,7 @@ class PlacesController extends GetxController
 
   @override
   void onInit() async {
- reservationId='36';
+ reservationId='37';
  section=null;
     formstate = GlobalKey<FormState>();
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();

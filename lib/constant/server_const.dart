@@ -21,6 +21,11 @@ static String showDrinks='${baseAPI}drinks';
 static String makeReservation='${baseAPI}reservations/make-reservation';
 static String setSection='${baseAPI}reservations/setSection';
 
+
+
+///// notification
+static String websocketUrl='${baseAPI}notifications';
+  
 /////////forImages
   static String loadImages = 'http://127.0.0.1:3000/';
 }
