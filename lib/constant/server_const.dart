@@ -20,6 +20,11 @@ class ServerConstApis {
   static String makeReservation = '${baseAPI}reservations/make-reservation';
   static String setSection = '${baseAPI}reservations/setSection';
 
+
+
+///// notification
+static String websocketUrl='${baseAPI}notifications';
+  
 /////////forImages
   static String loadImages = baseAPI;
 }

@@ -34,7 +34,6 @@ class OnBoardController extends GetxController {
   }
 
   void onPress() async {
-    print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     if (await prefService.isContainKey('token')) {
       Get.offAllNamed('/Bar');
       } else {

@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 class CartService {
   Future<Either<StatuseRequest, Map>> makeOrder(
-      String token, Map<String, dynamic> data) async {
+      String token, Map<String, String> data) async {
     //Either for return two data type in the same time
     try {
       if (await checkInternet()) {
@@ -21,6 +21,7 @@ class CartService {
 
         var response = await http.post(url, headers: headers, body: data);
         print(response.body);
+        print(response.statusCode);
         if (response.statusCode == 200 || response.statusCode == 201) {
           final responsebody = jsonDecode(response.body);
 

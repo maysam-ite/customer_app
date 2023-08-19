@@ -1,13 +1,13 @@
 import 'package:customer_app/main.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
+import '../../../constant/server_const.dart';
 import '../../../constant/status_request.dart';
 import '../../../data/Models/event_model.dart';
 import '../../../general_controllers/statuse_request_controller.dart';
 import '../../widget/no_internet_page.dart';
 import '../../widget/snak_bar_for_errors.dart';
 import 'event_service.dart';
-
 class EventController extends GetxController
     implements StatuseRequestController {
   List<EventModel> finalListData = [];
@@ -71,4 +71,9 @@ class EventController extends GetxController
     update();
     return finalListData;
   }
+
+
+
+
+ 
 }

@@ -8,7 +8,8 @@ import '../../widget/snak_bar_for_errors.dart';
 import 'cart_page.dart';
 import 'cart_service.dart.dart';
 
-class CartController extends GetxController  implements StatuseRequestController {
+class CartController extends GetxController
+    implements StatuseRequestController {
   @override
   StatuseRequest? statuseRequest = StatuseRequest.init;
   late RxBool passwordSecure = true.obs;
@@ -20,8 +21,6 @@ class CartController extends GetxController  implements StatuseRequestController
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
   }
-
-  
 
   void onpressDone() async {
     statuseRequest = StatuseRequest.loading;
@@ -44,21 +43,32 @@ class CartController extends GetxController  implements StatuseRequestController
 
   sendData() async {
     String token = await prefService.readString('token');
-    
-List<Map<String, dynamic>> drinksMapList = order.drinksWithAmount
-      .map((drinkAmount) => {
-            "drink_id": drinkAmount.drink.id,
-            "quantity": drinkAmount.amount,
-          })
-      .toList();
-      for (var i = 0; i < drinksMapList.length; i++) {
-        
-      print(drinksMapList[i]);
+
+// List<Map<String, dynamic>> drinksMapList = order.drinksWithAmount
+//       .map((drinkAmount) => {
+//             "drink_id": drinkAmount.drink.id,
+//             "quantity": drinkAmount.amount,
+//           })
+//       .toList();
+//       for (var i = 0; i < drinksMapList.length; i++) {
+
+//       print(drinksMapList[i]);
+//       }
+//       print(drinksMapList.length);
+    String finalOrder = '';
+    for (var i = 0; i < order.drinksWithAmount.length; i++) {
+      if (order.drinksWithAmount.length - 1 == i) {
+        finalOrder +=
+            "${order.drinksWithAmount[i].drink.id}:${order.drinksWithAmount[i].amount}";
+      } else {
+        finalOrder +=
+            "${order.drinksWithAmount[i].drink.id}:${order.drinksWithAmount[i].amount},";
       }
-      print(drinksMapList.length);
-    Map<String, dynamic> data = {
-      "reservation_id": 2,
-      "drinks": drinksMapList
+    }
+    Map<String, String> data = {
+      "reservation_id": "43",
+      "description":"d",
+          "drinks": finalOrder
     };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
         await service.makeOrder(token, data);
@@ -75,7 +85,7 @@ List<Map<String, dynamic>> drinksMapList = order.drinksWithAmount
   }
 
   whenLoginSuccess(response) async {
-     Get.back();
+    Get.back();
     update();
   }
 }
