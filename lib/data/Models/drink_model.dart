@@ -1,9 +1,9 @@
 class DrinkModel {
   String name;
-  double price;
+  int price;
   String image;
   String description;
-  double cost;
+  int cost;
   int quantity;
   int id;
   DrinkModel(

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:customer_app/constant/server_const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,6 +47,7 @@ class EventInfo extends StatelessWidget {
           children: [
             SizedBox(
               height: 250,
+              width:double.infinity,
               child: GestureDetector(
                   onHorizontalDragEnd: (details) {
                     const velocityThreshold = 2.0;
@@ -123,7 +125,7 @@ class EventInfo extends StatelessWidget {
     return AnimatedBuilder(
       animation: pageController, //controller.pageController,
       builder: (context, child) {
-        return PageView.builder(
+        return dataController.model.images.isEmpty?Image.asset('assets/images/The project icon.jpg',fit: BoxFit.fill,) :PageView.builder(
           onPageChanged: controller.setPageIndex,
           controller: pageController, //controller.pageController,
           itemCount: dataController.model.images.length,
@@ -134,7 +136,7 @@ class EventInfo extends StatelessWidget {
                 topRight: Radius.circular(size.buttonRadius),
               ),
               child: Image.network(
-                dataController.model.images[index].picture,
+                ServerConstApis.loadImages+dataController.model.images[index].picture,
                 fit: BoxFit.fill,
               ),
             );
@@ -145,7 +147,7 @@ class EventInfo extends StatelessWidget {
   }
 
   Widget buildDots() {
-    return Obx(() {
+    
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
@@ -154,8 +156,7 @@ class EventInfo extends StatelessWidget {
               buildDot(index: index, currentIndex: controller.pageIndex.value),
         ),
       );
-    });
-  }
+      }
 
   Widget setEventINfo(String title) {
     return Padding(
@@ -165,7 +166,10 @@ class EventInfo extends StatelessWidget {
   }
 
   Widget buildDot({required int index, required int currentIndex}) {
-    return AnimatedContainer(
+    return 
+    // Obx(()=>
+    
+    AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       margin: const EdgeInsets.all(5),
       height: 6,
@@ -176,6 +180,7 @@ class EventInfo extends StatelessWidget {
             ? (Get.isDarkMode ? darkPrimaryColor : primaryColor)
             : const Color(0xFFD8D8D8),
       ),
+    // )
     );
   }
 

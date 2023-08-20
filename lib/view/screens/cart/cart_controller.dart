@@ -1,3 +1,4 @@
+import 'package:customer_app/view/widget/drink_card.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +16,7 @@ class CartController extends GetxController
   late RxBool passwordSecure = true.obs;
   CartService service = CartService();
   late MakeOrder order;
+  String description='';
   @override
   void onInit() async {
     order = Get.arguments;
@@ -36,25 +38,14 @@ class CartController extends GetxController
     } else {
       // when happen a mestake we handel it here
       [];
-    }
 
+    }
     update();
   }
 
   sendData() async {
     String token = await prefService.readString('token');
 
-// List<Map<String, dynamic>> drinksMapList = order.drinksWithAmount
-//       .map((drinkAmount) => {
-//             "drink_id": drinkAmount.drink.id,
-//             "quantity": drinkAmount.amount,
-//           })
-//       .toList();
-//       for (var i = 0; i < drinksMapList.length; i++) {
-
-//       print(drinksMapList[i]);
-//       }
-//       print(drinksMapList.length);
     String finalOrder = '';
     for (var i = 0; i < order.drinksWithAmount.length; i++) {
       if (order.drinksWithAmount.length - 1 == i) {
@@ -65,9 +56,11 @@ class CartController extends GetxController
             "${order.drinksWithAmount[i].drink.id}:${order.drinksWithAmount[i].amount},";
       }
     }
+      String reservatinId=await prefService.readString('reservationID');
+
     Map<String, String> data = {
-      "reservation_id": "43",
-      "description":"d",
+      "reservation_id": reservatinId,
+      "description":description,
           "drinks": finalOrder
     };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
@@ -85,7 +78,11 @@ class CartController extends GetxController
   }
 
   whenLoginSuccess(response) async {
-    Get.back();
+    DrinkCardController drinkCardController=Get.find();
+    order.drinksWithAmount=[];
+    drinkCardController.makeTheNumberofDriknsEqualsZero();
+     Get.back();
+     snackBarForErrors('Your order send', 'Please wait until be done');
     update();
   }
 }

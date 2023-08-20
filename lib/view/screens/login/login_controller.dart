@@ -80,8 +80,8 @@ class LoginController extends GetxController
   }
 
   whenLoginSuccess(response) async {
-    await prefService.createString('token', response['token']); // storing token
-    Get.offNamed('/Bar');
+    await prefService.createString('token', response['data']['token']); // storing token
+    Get.offNamed('/Bar',arguments: response['data']['customer_id']);
     update();
   }
 }

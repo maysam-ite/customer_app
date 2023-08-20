@@ -68,10 +68,17 @@ class CartPage extends StatelessWidget {
         ),
         SizedBox(
           height: 50,
-          child: generalInputTextFeild(size, Icons.text_snippet_outlined,
-              'Enter your description', (vlue) {}, TextInputType.text, (value) {
-            return null;
-          }),
+          child: generalInputTextFeild(
+              size,
+              Icons.text_snippet_outlined,
+              'Enter your description',
+              (value) {
+                controller.description = value!;
+              },
+              TextInputType.text,
+              (value) {
+                return null;
+              }),
         ),
       ],
     );
@@ -85,6 +92,7 @@ class CartPage extends StatelessWidget {
         myRadius: size.buttonRadius,
         ontap: () {
           //send the data to the backend and go back to the prev page.
+          controller.onpressDone();
           Get.back();
         },
         mywidth: size.normalButtonWidht,
