@@ -1,7 +1,6 @@
 import 'package:customer_app/main.dart';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-import '../../../constant/server_const.dart';
 import '../../../constant/status_request.dart';
 import '../../../data/Models/event_model.dart';
 import '../../../general_controllers/statuse_request_controller.dart';
@@ -19,7 +18,7 @@ class EventController extends GetxController
    // statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     finalListData = await sendingARequestAndHandlingData();
  statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
-   
+   service.sse();
     super.onInit();
   }
 
@@ -62,7 +61,12 @@ class EventController extends GetxController
 
   Future<List<EventModel>> whenGetDataSuccess(response) async {
     List responsedata = response['data']['upComing'];
+    List responsedataNow = response['data']['now'];
     // print(responsedata);
+    for (int i = 0; i < responsedataNow.length; i++) {
+      // print(i);
+      finalListData.add(EventModel.fromMap(responsedataNow[i]));
+    }
     for (int i = 0; i < responsedata.length; i++) {
       // print(i);
       finalListData.add(EventModel.fromMap(responsedata[i]));

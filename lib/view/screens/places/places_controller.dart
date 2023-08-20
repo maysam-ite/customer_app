@@ -1,3 +1,4 @@
+import 'package:customer_app/view/screens/bar/bar_page_controller.dart';
 import 'package:customer_app/view/screens/places/places_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import '../../widget/snak_bar_for_errors.dart';
 
 class PlacesController extends GetxController
     implements StatuseRequestController {
-  late String reservationId;
+  
   // late String email;
   late int? section;
   @override
@@ -21,7 +22,7 @@ class PlacesController extends GetxController
 
   @override
   void onInit() async {
- reservationId='37';
+ 
  section=null;
     formstate = GlobalKey<FormState>();
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
@@ -45,9 +46,10 @@ class PlacesController extends GetxController
 
   sendData() async {
     String token = await prefService.readString('token');
-
+    String reservatinId=await prefService.readString('reservationID');
+print(reservatinId);
     Map<String, String> data = {
-      "reservation_id": reservationId,
+      "reservation_id": reservatinId,
       "section_number": section.toString()
     };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
@@ -65,6 +67,10 @@ class PlacesController extends GetxController
   }
 
   whenLoginSuccess(response) async {
+    snackBarForErrors('Your set has been confirmed'.tr, "You can order now in the bar section".tr);
+    BarPageController barPageController=Get.find();
+    barPageController.isPlaceSet=true;
+    barPageController.update();
     update();
   }
 }

@@ -41,8 +41,8 @@ class BarPage extends StatelessWidget {
                     visible: controller.page.value != 0,
                     child: FloatingActionButton.extended(
                         onPressed: () {
-                          onpressedDone(
-                              controller.page.value, drinkCardContrller);
+                          onpressedDone(controller.page.value,
+                              drinkCardContrller, controller);
                         },
                         label: Text('Done'.tr, style: generalTextStyle(null))),
                   )),
@@ -86,10 +86,20 @@ class BarPage extends StatelessWidget {
       DrinkCardController drinkCardContrller) {
     List<Widget> list = [
       buildEventGridView(),
-      places(controller),
-      buildBarGridView(Colors.blue, context, drinkCardContrller),
+      controller.isReservationConfirmed
+          ? places(controller)
+          : buildEmptyListWithMessage('enter to the house'.tr),
+      controller.isPlaceSet
+          ? buildBarGridView(Colors.blue, context, drinkCardContrller)
+          : buildEmptyListWithMessage('set your place first'.tr),
     ];
     return ([list[controller.page.value]]);
+  }
+
+  Widget buildEmptyListWithMessage(String message) {
+    return Center(
+      child: Text(message, style: generalTextStyle(30)),
+    );
   }
 
   Widget buildBarGridView(Color? color, BuildContext ccontext,
@@ -163,10 +173,11 @@ class BarPage extends StatelessWidget {
     );
   }
 
-  void onpressedDone(int index, DrinkCardController drinkCardController) {
-    if (index == 2) {
+  void onpressedDone(int index, DrinkCardController drinkCardController,
+      BarPageController barPageController) {
+    if (index == 2 && barPageController.isPlaceSet) {
       Get.toNamed('/Cart', arguments: drinkCardController.order);
-    } else if (index == 1) {
+    } else if (index == 1 && barPageController.isReservationConfirmed) {
       PlacesController controller = Get.find();
       controller.onpressDone();
     }

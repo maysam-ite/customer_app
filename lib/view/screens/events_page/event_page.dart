@@ -5,12 +5,16 @@ import 'package:get/get.dart';
 
 Widget buildEventGridView() {
   EventController controller = Get.put(EventController());
-  return ListView.builder(
-      itemCount: controller.finalListData.length,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-          child: NewEventCard(event: controller.finalListData[index]),
-        );
-      });
+  return GetBuilder<EventController>(
+    builder: (context) {
+      return ListView.builder(
+          itemCount: controller.finalListData.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              child: NewEventCard(event: controller.finalListData[index]),
+            );
+          });
+    }
+  );
 }

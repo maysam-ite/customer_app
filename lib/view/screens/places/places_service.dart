@@ -18,7 +18,7 @@ class PlaceService {
           // "Access-Control-Allow-Origin": "*",
           "x-access-token": token
         };
-
+print(data);
         var response = await http.post(url, headers: headers, body: data);
         print(response.body);
         print(response.statusCode);
