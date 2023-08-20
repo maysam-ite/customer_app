@@ -144,15 +144,19 @@ class BarPage extends StatelessWidget {
             backgroundColor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
             title: AnimationAppBarTitle(title: 'Customer app'.tr),
             actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Get.isDarkMode ? skinColorWhite : backGroundDarkColor,
-                  size: size.appBarIconSize,
+              Visibility(
+                visible: controller.page.value == 2,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color:
+                        Get.isDarkMode ? skinColorWhite : backGroundDarkColor,
+                    size: size.appBarIconSize,
+                  ),
+                  onPressed: () {
+                    Get.toNamed('/SearchPage');
+                  },
                 ),
-                onPressed: () {
-                  // Perform search action
-                },
               ),
             ],
           )),
