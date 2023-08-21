@@ -8,6 +8,8 @@ import 'package:customer_app/view/screens/landing/landing.dart';
 import 'package:customer_app/view/screens/login/login_binding.dart';
 import 'package:customer_app/view/screens/login/login_page.dart';
 import 'package:customer_app/view/screens/register/register_binding.dart';
+import 'package:customer_app/view/screens/search_page/search_binding.dart';
+import 'package:customer_app/view/screens/search_page/search_page.dart';
 import 'package:customer_app/view/screens/setting/setting_binding.dart';
 import 'package:get/get.dart';
 import 'view/screens/register/register_page.dart';
@@ -32,4 +34,8 @@ appRoutes() => [
           page: () => RegisterPage(),
           binding: RegisterBinding()),
       GetPage(name: '/Cart', page: () => CartPage(), binding: CartBinding()),
+      GetPage(
+          name: '/SearchPage',
+          page: () => SearchPage(),
+          binding: SearchBinding()),
     ];
