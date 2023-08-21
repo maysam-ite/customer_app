@@ -11,7 +11,6 @@ import '../../widget/snak_bar_for_errors.dart';
 
 class PlacesController extends GetxController
     implements StatuseRequestController {
-  
   // late String email;
   late int? section;
   @override
@@ -22,8 +21,7 @@ class PlacesController extends GetxController
 
   @override
   void onInit() async {
- 
- section=null;
+    section = null;
     formstate = GlobalKey<FormState>();
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
@@ -38,7 +36,7 @@ class PlacesController extends GetxController
     if (statuseRequest == StatuseRequest.success) {
       whenLoginSuccess(response);
     } else if (statuseRequest == StatuseRequest.authfailuer) {
-      snackBarForErrors("Auth error", "Please login again");
+      snackBarForErrors("Auth error".tr, "Please login again".tr);
       Get.offAllNamed('LoginPage');
     } else {}
     update();
@@ -46,8 +44,8 @@ class PlacesController extends GetxController
 
   sendData() async {
     String token = await prefService.readString('token');
-    String reservatinId=await prefService.readString('reservationID');
-print(reservatinId);
+    String reservatinId = await prefService.readString('reservationID');
+    print(reservatinId);
     Map<String, String> data = {
       "reservation_id": reservatinId,
       "section_number": section.toString()
@@ -67,9 +65,10 @@ print(reservatinId);
   }
 
   whenLoginSuccess(response) async {
-    snackBarForErrors('Your set has been confirmed'.tr, "You can order now in the bar section".tr);
-    BarPageController barPageController=Get.find();
-    barPageController.isPlaceSet=true;
+    snackBarForErrors('Your set has been confirmed'.tr,
+        "You can order now in the bar section".tr);
+    BarPageController barPageController = Get.find();
+    barPageController.isPlaceSet = true;
     barPageController.update();
     update();
   }

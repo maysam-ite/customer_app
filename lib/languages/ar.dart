@@ -123,4 +123,13 @@ const Map<String, String> ar = {
   "Number of setes": "عدد المقاعد",
   'Cart page': 'صفحة التسوق',
   "Price": 'السعر',
+  'set your place first': 'حدد مكان جلوسك اولا',
+  'enter to the house': 'ادخل الى الدار',
+  "New Event added": "تم اضافة حدث جديد",
+  "See you in anther events ": "نراك في حدث اخر ",
+  "Our event is ended": "انتهى حدثنا",
+  "Please take a look ": "من فضلك الق نظرة ",
+  "Your attendance confirmed": "تم تأكيد حضورك",
+  'Your order send': 'يتم إرسال طلبك',
+  'Please wait until be done': 'من فضلك انتظر حتى تنتهي',
 };

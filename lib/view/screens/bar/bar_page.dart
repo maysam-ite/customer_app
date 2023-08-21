@@ -88,17 +88,17 @@ class BarPage extends StatelessWidget {
       buildEventGridView(),
       controller.isReservationConfirmed
           ? places(controller)
-          : buildEmptyListWithMessage('enter to the house'.tr),
+          : buildEmptyListWithMessage('enter to the house'),
       controller.isPlaceSet
           ? buildBarGridView(Colors.blue, context, drinkCardContrller)
-          : buildEmptyListWithMessage('set your place first'.tr),
+          : buildEmptyListWithMessage('set your place first'),
     ];
     return ([list[controller.page.value]]);
   }
 
   Widget buildEmptyListWithMessage(String message) {
     return Center(
-      child: Text(message, style: generalTextStyle(30)),
+      child: Text(message.tr, style: generalTextStyle(30)),
     );
   }
 

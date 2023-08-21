@@ -43,24 +43,21 @@ class MakeReservation extends StatelessWidget {
                     color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
                   ),
                 ),
-                const SizedBox(height: 40),
-                generalInputTextFeild(size, Icons.person, 'Enter your name'.tr,
-                    (value) {}, TextInputType.name, (value) {
-                  return null;
-                }),
+                const SizedBox(height: 60),
                 generalInputTextFeild(
                     size,
                     Icons.confirmation_number,
                     'Number of setes'.tr,
                     (value) {
-                      controller.numberOfPlaces=value!;
+                      controller.numberOfPlaces = value!;
                     },
-                    TextInputType.number, (value) {
-                      if(int.parse(value!) <1){
+                    TextInputType.number,
+                    (value) {
+                      if (int.parse(value!) < 1) {
                         return "At least one persone";
                       }
-                  return null;
-                }),
+                      return null;
+                    }),
                 SizedBox(
                   height: Get.size.height * .5,
                 ),

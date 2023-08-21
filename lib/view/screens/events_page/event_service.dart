@@ -52,7 +52,7 @@ class EventService {
             prefService.createString('reservationID', g);
             barPageController.update();
             snackBarForErrors(
-                "Your attendance confirmed", "Please take a look ");
+                "Your attendance confirmed".tr, "Please take a look ".tr);
           }
         }
         // Here, you can parse the data as needed and handle the event
