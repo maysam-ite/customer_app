@@ -18,6 +18,7 @@ class EventInfo extends StatelessWidget {
   final EventCardController controller = Get.find();
   final PageController pageController = PageController();
   EventInfoController dataController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     Sizes size = Sizes(context);
@@ -47,7 +48,7 @@ class EventInfo extends StatelessWidget {
           children: [
             SizedBox(
               height: 250,
-              width:double.infinity,
+              width: double.infinity,
               child: GestureDetector(
                   onHorizontalDragEnd: (details) {
                     const velocityThreshold = 2.0;
@@ -92,7 +93,7 @@ class EventInfo extends StatelessWidget {
             height: 10,
           ),
           setEventINfo(
-              'Artists: ${dataController.model.artist.map((artist) => artist.artistName).join(', ')}'),
+              '${'Artists: '.tr}${dataController.model.artist.map((artist) => artist.artistName).join(', ')}'),
           elementDivider(),
           const SizedBox(height: 3),
           setEventINfo(
@@ -125,38 +126,43 @@ class EventInfo extends StatelessWidget {
     return AnimatedBuilder(
       animation: pageController, //controller.pageController,
       builder: (context, child) {
-        return dataController.model.images.isEmpty?Image.asset('assets/images/The project icon.jpg',fit: BoxFit.fill,) :PageView.builder(
-          onPageChanged: controller.setPageIndex,
-          controller: pageController, //controller.pageController,
-          itemCount: dataController.model.images.length,
-          itemBuilder: (context, index) {
-            return ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(size.buttonRadius),
-                topRight: Radius.circular(size.buttonRadius),
-              ),
-              child: Image.network(
-                ServerConstApis.loadImages+dataController.model.images[index].picture,
+        return dataController.model.images.isEmpty
+            ? Image.asset(
+                'assets/images/The project icon.jpg',
                 fit: BoxFit.fill,
-              ),
-            );
-          },
-        );
+              )
+            : PageView.builder(
+                onPageChanged: controller.setPageIndex,
+                controller: pageController, //controller.pageController,
+                itemCount: dataController.model.images.length,
+                itemBuilder: (context, index) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(size.buttonRadius),
+                      topRight: Radius.circular(size.buttonRadius),
+                    ),
+                    child: Image.network(
+                      ServerConstApis.loadImages +
+                          dataController.model.images[index].picture,
+                      fit: BoxFit.fill,
+                    ),
+                  );
+                },
+              );
       },
     );
   }
 
   Widget buildDots() {
-    
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          dataController.model.images.length,
-          (index) =>
-              buildDot(index: index, currentIndex: controller.pageIndex.value),
-        ),
-      );
-      }
+    return Obx(() => Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            dataController.eventModelImageLengh.value,
+            (index) => buildDot(
+                index: index, currentIndex: controller.pageIndex.value),
+          ),
+        ));
+  }
 
   Widget setEventINfo(String title) {
     return Padding(
@@ -166,10 +172,10 @@ class EventInfo extends StatelessWidget {
   }
 
   Widget buildDot({required int index, required int currentIndex}) {
-    return 
-    // Obx(()=>
-    
-    AnimatedContainer(
+    return
+        // Obx(()=>
+
+        AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       margin: const EdgeInsets.all(5),
       height: 6,
@@ -180,7 +186,7 @@ class EventInfo extends StatelessWidget {
             ? (Get.isDarkMode ? darkPrimaryColor : primaryColor)
             : const Color(0xFFD8D8D8),
       ),
-    // )
+      // )
     );
   }
 

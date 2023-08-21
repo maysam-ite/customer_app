@@ -16,7 +16,7 @@ class CartController extends GetxController
   late RxBool passwordSecure = true.obs;
   CartService service = CartService();
   late MakeOrder order;
-  String description='';
+  String description = '';
   @override
   void onInit() async {
     order = Get.arguments;
@@ -33,12 +33,11 @@ class CartController extends GetxController
     if (statuseRequest == StatuseRequest.success) {
       whenLoginSuccess(response);
     } else if (statuseRequest == StatuseRequest.authfailuer) {
-      snackBarForErrors("Auth error", "Please login again");
+      snackBarForErrors("Auth error".tr, "Please login again".tr);
       Get.offAllNamed('LoginPage');
     } else {
       // when happen a mestake we handel it here
       [];
-
     }
     update();
   }
@@ -56,12 +55,12 @@ class CartController extends GetxController
             "${order.drinksWithAmount[i].drink.id}:${order.drinksWithAmount[i].amount},";
       }
     }
-      String reservatinId=await prefService.readString('reservationID');
+    String reservatinId = await prefService.readString('reservationID');
 
     Map<String, String> data = {
       "reservation_id": reservatinId,
-      "description":description,
-          "drinks": finalOrder
+      "description": description,
+      "drinks": finalOrder
     };
     Either<StatuseRequest, Map<dynamic, dynamic>> response =
         await service.makeOrder(token, data);
@@ -78,11 +77,11 @@ class CartController extends GetxController
   }
 
   whenLoginSuccess(response) async {
-    DrinkCardController drinkCardController=Get.find();
-    order.drinksWithAmount=[];
+    DrinkCardController drinkCardController = Get.find();
+    order.drinksWithAmount = [];
     drinkCardController.makeTheNumberofDriknsEqualsZero();
-     Get.back();
-     snackBarForErrors('Your order send', 'Please wait until be done');
+    Get.back();
+    snackBarForErrors('Your order send'.tr, 'Please wait until be done'.tr);
     update();
   }
 }

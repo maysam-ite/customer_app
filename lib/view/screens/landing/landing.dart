@@ -75,8 +75,11 @@ class Landing extends StatelessWidget {
                     myheight: size.normalButtonHeight,
                     mycolor: Get.isDarkMode ? darkPrimaryColor : primaryColor,
                     ontap: () {
+                      // prefService.remove('token');
+                      // prefService.remove('id');
+
                       controller.onPress();
-                       },
+                    },
                     child: Text(
                       'Continue'.tr,
                       style: TextStyle(
