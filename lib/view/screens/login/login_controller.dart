@@ -81,7 +81,27 @@ class LoginController extends GetxController
 
   whenLoginSuccess(response) async {
     await prefService.createString('token', response['data']['token']); // storing token
-    Get.offNamed('/Bar',arguments: response['data']['customer_id']);
-    update();
+    await prefService.createString('customer_id', response['data']['customer_id'].toString()); // storing token
+     if(! await prefService.isContainKey('isReservationConfirmed')){
+          prefService.createString('isPlaceSet',false.toString());
+            prefService.createString('isReservationConfirmed',false.toString());
+            
+        }
+          
+        String isReservationConfirmed=await prefService.readString('isReservationConfirmed');
+        String isPlaceSet= await prefService.readString('isPlaceSet');
+        String customer_id=await prefService.readString('customer_id'); 
+
+
+         Map<String,String > data = {
+      "isPlaceSet" : isPlaceSet,
+      "isReservationConfirmed" : isReservationConfirmed,
+      "customer_id":customer_id
+   };
+        print(data['isReservationConfirmed']);
+        print(data['isPlaceSet']);
+        print( data['customer_id']);
+       Get.offAllNamed('/Bar',parameters: data);
+      update();
   }
 }

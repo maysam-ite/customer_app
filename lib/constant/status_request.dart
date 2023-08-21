@@ -5,5 +5,6 @@ enum StatuseRequest{
     authfailuer,
     validationfailuer,
     serverfailure,
-    offlinefailure
+    offlinefailure,
+    eventEnd
 }

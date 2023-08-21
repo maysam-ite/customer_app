@@ -13,7 +13,8 @@ class PlacesController extends GetxController
     implements StatuseRequestController {
   
   // late String email;
-  late int? section;
+   RxInt section=30.obs;
+
   @override
   StatuseRequest? statuseRequest = StatuseRequest.init;
 
@@ -23,7 +24,6 @@ class PlacesController extends GetxController
   @override
   void onInit() async {
  
- section=null;
     formstate = GlobalKey<FormState>();
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
@@ -70,6 +70,7 @@ print(reservatinId);
     snackBarForErrors('Your set has been confirmed'.tr, "You can order now in the bar section".tr);
     BarPageController barPageController=Get.find();
     barPageController.isPlaceSet=true;
+    prefService.createString('isPlaceSet',true.toString());
     barPageController.update();
     update();
   }

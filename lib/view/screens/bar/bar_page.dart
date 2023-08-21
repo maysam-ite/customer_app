@@ -51,32 +51,36 @@ class BarPage extends StatelessWidget {
       extendBody: true,
       appBar: createAppBar(size, controller.page, controller),
       drawer: ProjectDrawer(),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 30),
-              decoration: BoxDecoration(
-                color: Get.isDarkMode ? backGroundDarkColor : skinColorWhite,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
+      body: Builder(
+        builder: (context) {
+          return SafeArea(
+            child: Stack(
+              children: [
+                Container(
+                  color: Get.isDarkMode ? darkPrimaryColor : primaryColor,
                 ),
-              ),
-            ),
-            Obx(() {
-              return Positioned.fill(
-                child: TabBarView(
-                  controller: controller.tabControllerBottomNavBar,
-                  children: selectPage(controller, context, drinkCardContrller),
+                Container(
+                  margin: const EdgeInsets.only(top: 30),
+                  decoration: BoxDecoration(
+                    color: Get.isDarkMode ? backGroundDarkColor : skinColorWhite,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15),
+                    ),
+                  ),
                 ),
-              );
-            }),
-          ],
-        ),
+                Obx(() {
+                  return Positioned.fill(
+                    child: TabBarView(
+                      controller: controller.tabControllerBottomNavBar,
+                      children: selectPage(controller, context, drinkCardContrller),
+                    ),
+                  );
+                }),
+              ],
+            ),
+          );
+        }
       ),
       bottomNavigationBar: const BottomNavBar(),
     );

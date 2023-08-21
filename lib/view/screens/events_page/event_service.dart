@@ -41,13 +41,18 @@ class EventService {
 
             snackBarForErrors("New Event added".tr, "Please take a look ".tr);
           } else if (d == 'data: event is ended') {
+            barPageController.changePage(0);
             barPageController.isPlaceSet = false;
             barPageController.isReservationConfirmed = false;
-            prefService.remove('reservationID');
+            
+            prefService.createString('reservationID', 0.toString());
+            prefService.createString('isPlaceSet',false.toString());
+            prefService.createString('isReservationConfirmed',false.toString());
             snackBarForErrors(
                 "Our event is ended".tr, "See you in anther events ".tr);
           } else {
             barPageController.isReservationConfirmed = true;
+            prefService.createString('isReservationConfirmed',true.toString());
             String g = d.toString().substring(6);
             prefService.createString('reservationID', g);
             barPageController.update();

@@ -26,6 +26,8 @@ class CartService {
           final responsebody = jsonDecode(response.body);
 
           return Right(responsebody);
+        } else if (response.statusCode == 303) {
+          return const Left(StatuseRequest.eventEnd);
         } else if (response.statusCode == 401) {
           return const Left(StatuseRequest.authfailuer);
         } else {

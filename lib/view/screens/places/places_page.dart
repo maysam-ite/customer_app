@@ -1,4 +1,5 @@
 import 'package:customer_app/constant/theme.dart';
+import 'package:customer_app/view/screens/places/places_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -153,13 +154,15 @@ Widget middelTable(List<int> sectionsNumbers) {
 
 Widget middelTablePart(double topLeft, double topRight, double bottomRight,
     double bottomLeft, int sectionNumber) {
+      PlacesController dataController=Get.find();
+  
   return Container(
       height: 60,
       width: 60,
       decoration: BoxDecoration(
         color: tablesColor,
         border: Border.all(
-            color: Get.isDarkMode ? skinColorWhite! : backGroundDarkColor,
+            color: dataController.section.value==sectionNumber?backGroundDarkColor:skinColorWhite!,
             width: 0.5),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(bottomLeft),
@@ -202,19 +205,24 @@ Widget table(double? bottom, double? top, double? left, double? right,
 }
 
 Widget tablePart(int sectionNumber) {
+       PlacesController dataController=Get.find();
   return GestureDetector(
     onTap: () {
-      // print(sectionNumber);
+          dataController.section.value=sectionNumber;
+         
     },
-    child: Container(
-      width: 60,
-      height: 50,
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Get.isDarkMode ? skinColorWhite! : backGroundDarkColor,
-              width: 0.5),
-          color: tablesColor),
-      child: sectionNumberContainer(sectionNumber),
+    child: Obx(
+      ()=>Container(
+        width: 60,
+        height: 50,
+
+        decoration: BoxDecoration(
+            border: Border.all(
+                color: Get.isDarkMode ? skinColorWhite! : backGroundDarkColor,
+                width: 0.5),
+            color:dataController.section.value==sectionNumber?backGroundDarkColor:skinColorWhite!),
+        child: sectionNumberContainer(sectionNumber),
+      ),
     ),
   );
 }

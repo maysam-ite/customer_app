@@ -36,7 +36,21 @@ class OnBoardController extends GetxController {
   void onPress() async {
     try {
       if (await prefService.isContainKey('token')) {
-        Get.offAllNamed('/Bar');
+        if(! await prefService.isContainKey('isReservationConfirmed')){
+          prefService.createString('isPlaceSet',false.toString());
+            prefService.createString('isReservationConfirmed',false.toString());
+            
+        }
+          
+        String isReservationConfirmed=await prefService.readString('isReservationConfirmed');
+        String isPlaceSet= await prefService.readString('isPlaceSet');
+        String customer_id=await prefService.readString('customer_id'); 
+         Map<String,String > data = {
+      "isPlaceSet" : isPlaceSet,
+      "isReservationConfirmed" : isReservationConfirmed,
+      "customer_id":customer_id
+   };
+        Get.offAllNamed('/Bar',parameters: data);
       } else {
         Get.offAllNamed('/LoginPage');
       }

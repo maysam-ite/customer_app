@@ -10,8 +10,8 @@ Widget sectionNumberContainer(int sectionNumber) {
     alignment: Alignment.center,
     child: GestureDetector(
       onTap: () {
-          PlacesController dataController=Get.put(PlacesController());
-          dataController.section=sectionNumber;
+          PlacesController dataController=Get.find();
+          dataController.section.value=sectionNumber;
           print(dataController.section);
       },
       child: Container(

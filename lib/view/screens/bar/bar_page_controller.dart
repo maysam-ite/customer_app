@@ -9,24 +9,28 @@ class BarPageController extends GetxController
   RxInt page = 0.obs;
   late TabController? tabControllerAppbarBottom;
   late TabController? tabControllerBottomNavBar;
-  bool isReservationConfirmed=false;
-  bool isPlaceSet=false;
-  late int customer_id;
+  bool isReservationConfirmed = false;
+  bool isPlaceSet = false;
+  int customer_id = 18;
   late String resevationId;
-  BarPageService service=BarPageService();
+  BarPageService service = BarPageService();
   @override
-  void onInit() {
-    try{
+  void onReady() async {
+    customer_id = int.parse(Get.parameters['customer_id']!);
+    isPlaceSet = bool.parse(Get.parameters['isPlaceSet']!);
 
-    customer_id=Get.arguments;
+    isReservationConfirmed =
+        bool.parse(Get.parameters['isReservationConfirmed']!);
+
+    // TODO: implement onReady
+    super.onReady();
+  }
+
+  @override
+  void onInit() async {
     tabControllerAppbarBottom = TabController(length: 2, vsync: this);
     tabControllerBottomNavBar = TabController(length: 1, vsync: this);
 
-    }catch(e){
-      prefService.remove('token');
-      Get.offAllNamed('/');
-
-    }
     super.onInit();
   }
 
