@@ -1,17 +1,13 @@
 import 'dart:convert';
 
-import 'package:customer_app/main.dart';
 import 'package:dartz/dartz.dart';
-import 'package:get/get.dart';
-
 import '../../../constant/server_const.dart';
 import '../../../constant/status_request.dart';
 import '../../../data/checkInternet/check_internet.dart';
 import 'package:http/http.dart' as http;
 
-class BarPageService{
-  
-   Future<Either<StatuseRequest, Map>> getDrinks(String token) async {
+class BarPageService {
+  Future<Either<StatuseRequest, Map>> getDrinks(String token) async {
     //Either for return two data type in the same time
     try {
       if (await checkInternet()) {
@@ -41,5 +37,4 @@ class BarPageService{
       return const Left(StatuseRequest.offlinefailure);
     }
   }
-
 }
