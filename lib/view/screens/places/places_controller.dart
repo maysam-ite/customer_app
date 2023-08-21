@@ -23,8 +23,7 @@ class PlacesController extends GetxController
   @override
   void onInit() async {
  
- section=null;
-    formstate = GlobalKey<FormState>();
+     formstate = GlobalKey<FormState>();
     //statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     super.onInit();
   }
