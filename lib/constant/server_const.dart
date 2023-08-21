@@ -22,6 +22,7 @@ class ServerConstApis {
 
 ///// notification
   static String websocketUrl = '${baseAPI}notifications';
+  static String chickEventIsIn='${baseAPI}r/check';
 
 /////////forImages
   static String loadImages = baseAPI;
