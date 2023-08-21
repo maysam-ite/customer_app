@@ -66,9 +66,11 @@ class PlacesController extends GetxController
   }
 
   whenLoginSuccess(response) async {
-    snackBarForErrors('Your set has been confirmed'.tr, "You can order now in the bar section".tr);
+    snackBarForErrors('Your seat has been confirmed'.tr, "You can order now in the bar section".tr);
     BarPageController barPageController=Get.find();
     barPageController.isPlaceSet=true;
+     prefService.createString('isPlaceSet',true.toString());
+         
     barPageController.update();
     update();
   }

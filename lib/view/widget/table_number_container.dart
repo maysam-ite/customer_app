@@ -12,8 +12,7 @@ Widget sectionNumberContainer(int sectionNumber) {
       onTap: () {
           PlacesController dataController=Get.find();
           dataController.section.value=sectionNumber;
-          print(dataController.section);
-      },
+          },
       child: Container(
         height: 35,
         width: 35,

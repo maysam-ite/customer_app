@@ -8,16 +8,21 @@ class GeneralSearchController extends GetxController {
 
   @override
   void onInit() {
-    drinkSearchedList = drinkCardController.finalListData;
-    super.onInit();
+  // if (drinkSearchedList.isEmpty) {
+      
+      drinkSearchedList .addAll( drinkCardController.finalListData);
+  drinkSearchedListLength.value = drinkCardController.finalListData.length;
+
+    // }
+    print('drinkSearchedList.length: ');
+    print(drinkSearchedList.length);
+    print(drinkCardController.finalListData.length);
+  super.onInit();
   }
 
   RxInt drinkSearchedListLength = 0.obs;
   void drinkSearch(String drinkSearhedName) {
-    if (drinkSearchedList.isEmpty) {
-      drinkSearchedList = drinkCardController.finalListData;
-    }
-
+    
     print('drinkSearchedList: ');
     print(drinkSearchedList.length);
 

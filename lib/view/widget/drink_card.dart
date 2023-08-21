@@ -115,7 +115,7 @@ class DrinkCard extends StatelessWidget {
         onPressed: () {
           addOrRemove == 'add'
               ? drinkCardController.increaseTheNumberOfDrinks(id, drink)
-              : drinkCardController.decreaseTheNumberOfDrinks(id);
+              : drinkCardController.decreaseTheNumberOfDrinks(id,drink);
           //  add one from this drink or remove one of the drink
         },
         child: Icon(
@@ -201,10 +201,12 @@ class DrinkCardController extends GetxController
       for (var element in order.drinksWithAmount) {
         if (element.drink == drink) {
           element.amount++;
+          break;
         }
       }
     }
   }
+
 
   bool ifAddForTheFirstTime(DrinkModel drink) {
     for (var element in order.drinksWithAmount) {
@@ -215,10 +217,21 @@ class DrinkCardController extends GetxController
     return true;
   }
 
-  void decreaseTheNumberOfDrinks(int id) {
-    order.drinksWithAmount[id].amount--;
-    numberOfDrinks[id] > 0 ? numberOfDrinks[id].value-- : null;
-  }
+  void decreaseTheNumberOfDrinks(int id, DrinkModel drink) {
+    for (var element in order.drinksWithAmount) {
+        if (element.drink == drink) {
+          if(element.amount>0){
+   numberOfDrinks[id].value--;
+            
+          element.amount--;
+          if(element.amount==0){
+            order.drinksWithAmount.remove(element);
+            
+          }
+          break;
+          }
+        }
+  }}
 
   void makeTheNumberofDriknsEqualsZero() {
     for (var element in numberOfDrinks) {

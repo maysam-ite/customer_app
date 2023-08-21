@@ -104,4 +104,5 @@ const Map<String, String> en = {
   'Customer app': 'Customer app',
   'Place': 'Place',
   'Bar': 'Bar',
+  'Please decrease your seats number':'Please decrease your seats number'
 };

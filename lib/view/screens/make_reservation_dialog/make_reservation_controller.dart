@@ -38,8 +38,12 @@ class MakeReservationController extends GetxController
       statuseRequest = handlingData(response); //return the statuseResponse
       if (statuseRequest == StatuseRequest.success) {
         whenLoginSuccess(response);
-      } else if (statuseRequest == StatuseRequest.authfailuer) {
-      snackBarForErrors("Auth error", "Please login again");
+      } else if (statuseRequest == StatuseRequest.validationfailuer){
+        snackBarForErrors("There is no enough places".tr, "Please decrease your seats number".tr);
+      
+      }
+       else if (statuseRequest == StatuseRequest.authfailuer) {
+      snackBarForErrors("Auth error".tr, "Please login again".tr);
       Get.offAllNamed('LoginPage');
     } else {
         
@@ -74,6 +78,9 @@ class MakeReservationController extends GetxController
   }
 
   whenLoginSuccess(response) async {
+    EventInfoController eventInfoController=Get.find();
+    eventInfoController.model.availablePlaces-=int.parse( numberOfPlaces);
+    eventInfoController.update();
     Get.back();
     update();
   }}

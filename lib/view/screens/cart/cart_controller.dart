@@ -47,13 +47,14 @@ class CartController extends GetxController
 
     String finalOrder = '';
     for (var i = 0; i < order.drinksWithAmount.length; i++) {
+      if(order.drinksWithAmount[i].amount>0){
       if (order.drinksWithAmount.length - 1 == i) {
         finalOrder +=
             "${order.drinksWithAmount[i].drink.id}:${order.drinksWithAmount[i].amount}";
       } else {
         finalOrder +=
             "${order.drinksWithAmount[i].drink.id}:${order.drinksWithAmount[i].amount},";
-      }
+      }}
     }
     String reservatinId = await prefService.readString('reservationID');
 

@@ -132,4 +132,8 @@ const Map<String, String> ar = {
   "Your attendance confirmed": "تم تأكيد حضورك",
   'Your order send': 'يتم إرسال طلبك',
   'Please wait until be done': 'من فضلك انتظر حتى تنتهي',
+  'Please decrease your seats number':'يرجى تقليل عدد المقاعد',
+  'There is no enough places':'لا توجد أماكن كافية',
+  'Your seat has been confirmed':'تم تأكيد مقعدك',
+  'You can order now in the bar section':'يمكنك الطلب الآن في قسم البار'
 };
