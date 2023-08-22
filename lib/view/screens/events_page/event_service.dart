@@ -44,15 +44,16 @@ class EventService {
             barPageController.changePage(0);
             barPageController.isPlaceSet = false;
             barPageController.isReservationConfirmed = false;
-            
+
             prefService.createString('reservationID', 0.toString());
-            prefService.createString('isPlaceSet',false.toString());
-            prefService.createString('isReservationConfirmed',false.toString());
+            prefService.createString('isPlaceSet', false.toString());
+            prefService.createString(
+                'isReservationConfirmed', false.toString());
             snackBarForErrors(
                 "Our event is ended".tr, "See you in anther events ".tr);
           } else {
             barPageController.isReservationConfirmed = true;
-            prefService.createString('isReservationConfirmed',true.toString());
+            prefService.createString('isReservationConfirmed', true.toString());
             String g = d.toString().substring(6);
             prefService.createString('reservationID', g);
             barPageController.update();
@@ -80,7 +81,7 @@ class EventService {
         };
 
         var response = await http.get(url, headers: headers);
-        print(response.body);
+
         if (response.statusCode == 200 || response.statusCode == 201) {
           final responsebody = jsonDecode(response.body);
 

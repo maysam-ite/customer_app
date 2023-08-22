@@ -1,5 +1,5 @@
 class ServerConstApis {
-  static String baseAPI = 'http://192.168.43.170:3000/';
+  static String baseAPI = 'https://culter-house-backend.onrender.com/';
 
 ///// sign
   static String signUp = '${baseAPI}customers/signup';
@@ -15,14 +15,13 @@ class ServerConstApis {
 //////////// drinks
 
   static String showDrinks = '${baseAPI}drinks';
-
 ///////////reservation
   static String makeReservation = '${baseAPI}reservations/make-reservation';
   static String setSection = '${baseAPI}reservations/setSection';
 
 ///// notification
   static String websocketUrl = '${baseAPI}notifications';
-  static String chickEventIsIn='${baseAPI}r/check';
+  static String chickEventIsIn = '${baseAPI}r/check';
 
 /////////forImages
   static String loadImages = baseAPI;

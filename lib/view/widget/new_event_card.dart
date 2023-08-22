@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -95,7 +97,9 @@ class NewEventCard extends StatelessWidget {
                       fit: BoxFit.fill)
                   : Image.network(
                       "${ServerConstApis.loadImages}${event.images[0].picture}",
-                      fit: BoxFit.fill))),
+                      errorBuilder: (context, error, stacktrace) {
+                      return Image.asset('assets/images/The project icon.jpg');
+                    }, fit: BoxFit.fill))),
     );
   }
 
