@@ -27,7 +27,10 @@ class MakeReservationService {
           return Right(responsebody);
         } else if (response.statusCode == 401) {
           return const Left(StatuseRequest.authfailuer);
-        } else {
+        } else if (response.statusCode == 400) {
+          return const Left(StatuseRequest.validationfailuer);
+        }
+         else {
           return const Left(StatuseRequest.serverfailure);
         }
       } else {

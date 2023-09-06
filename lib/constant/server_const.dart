@@ -15,13 +15,13 @@ class ServerConstApis {
 //////////// drinks
 
   static String showDrinks = '${baseAPI}drinks';
-
 ///////////reservation
   static String makeReservation = '${baseAPI}reservations/make-reservation';
   static String setSection = '${baseAPI}reservations/setSection';
 
 ///// notification
   static String websocketUrl = '${baseAPI}notifications';
+  static String chickEventIsIn = '${baseAPI}r/check';
 
 /////////forImages
   static String loadImages = baseAPI;

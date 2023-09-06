@@ -160,10 +160,9 @@ Widget middelTablePart(double topLeft, double topRight, double bottomRight,
       height: 60,
       width: 60,
       decoration: BoxDecoration(
-        color: tablesColor,
+        color: dataController.section.value==sectionNumber?  Get.isDarkMode?primaryColor:darkPrimaryColor :tablesColor,
         border: Border.all(
-            color: dataController.section.value==sectionNumber?backGroundDarkColor:skinColorWhite!,
-            width: 0.5),
+            color:Get.isDarkMode?skinColorWhite!:backGroundDarkColor ,width: 0.5),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(bottomLeft),
           topLeft: Radius.circular(topLeft),
@@ -220,7 +219,7 @@ Widget tablePart(int sectionNumber) {
             border: Border.all(
                 color: Get.isDarkMode ? skinColorWhite! : backGroundDarkColor,
                 width: 0.5),
-            color:dataController.section.value==sectionNumber?backGroundDarkColor:skinColorWhite!),
+            color: dataController.section.value==sectionNumber?  Get.isDarkMode?primaryColor:darkPrimaryColor :tablesColor),
         child: sectionNumberContainer(sectionNumber),
       ),
     ),

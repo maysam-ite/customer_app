@@ -7,6 +7,7 @@ import '../../../general_controllers/statuse_request_controller.dart';
 import '../../widget/no_internet_page.dart';
 import '../../widget/snak_bar_for_errors.dart';
 import 'event_service.dart';
+
 class EventController extends GetxController
     implements StatuseRequestController {
   List<EventModel> finalListData = [];
@@ -15,10 +16,11 @@ class EventController extends GetxController
   StatuseRequest? statuseRequest = (StatuseRequest.init);
   @override
   void onInit() async {
-   // statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
+    // statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
     finalListData = await sendingARequestAndHandlingData();
- statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
-   service.sse();
+    statuseRequest = await checkIfTheInternetIsConectedBeforGoingToThePage();
+    print('object');
+    service.sse();
     super.onInit();
   }
 
@@ -75,9 +77,4 @@ class EventController extends GetxController
     update();
     return finalListData;
   }
-
-
-
-
- 
 }

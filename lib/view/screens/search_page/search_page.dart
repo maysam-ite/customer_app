@@ -55,11 +55,11 @@ class SearchPage extends StatelessWidget {
           ),
           itemCount: controller.drinkSearchedListLength.value,
           itemBuilder: (context, index) {
+                  
             return DrinkCard(
               id: index,
-              drink: controller.drinkSearchedList.isEmpty
-                  ? drinkCardController.finalListData[index]
-                  : controller.drinkSearchedList[index],
+              drink:
+                   controller.drinkSearchedList[index],
             );
           },
         ));
