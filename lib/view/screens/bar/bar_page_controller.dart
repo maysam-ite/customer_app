@@ -20,8 +20,6 @@ class BarPageController extends GetxController
 
     isReservationConfirmed =
         bool.parse(Get.parameters['isReservationConfirmed']!);
-
-    // TODO: implement onReady
     super.onReady();
   }
 
