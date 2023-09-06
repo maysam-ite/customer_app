@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../main.dart';
 import 'bar_page_service.dart';
 
 class BarPageController extends GetxController
